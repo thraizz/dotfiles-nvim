@@ -23,8 +23,7 @@ Plug 'roman/golden-ratio'
 call plug#end()
 
 " Set vim configuration path
-" let $VIM_CONFIG=fnamemodify(expand("$MYVIMRC"), ":p:h")
-let $VIM_CONFIG='/home/dubai/.config/nvim/'
+let $VIM_CONFIG="$HOME/.config/nvim/"
 
 " Load plugin configuration
 so $VIM_CONFIG/plugins.vim

@@ -1,7 +1,6 @@
 call plug#begin('~/.vim/bundle')
 Plug 'xolox/vim-notes'
 Plug 'xolox/vim-misc'
-Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'Yggdroot/indentLine'
 Plug 'ciaranm/detectindent'
@@ -69,5 +68,6 @@ set foldenable
 set foldlevelstart=10     " default folding level when buffer is opened
 set foldnestmax=10        " maximum nested fold
 set foldmethod=manual     " fold manual
+let g:golden_ratio_exclude_nonmodifiable = 1
+filetype plugin on
 
-" Sources

@@ -27,3 +27,11 @@ nnoremap <S-Tab> <<
 noremap <F9> :!%:p<ENTER>
 " Don't jump to first match
 cnoreabbrev Ack Ack!
+
+" Let our leader be ,
+let mapleader=","
+
+" In normal mode we want ; to become :
+" This way we dont have to use Shift+;
+" (reduces errors like `:Q is not a command`)
+nnoremap ; :

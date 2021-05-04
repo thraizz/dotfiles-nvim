@@ -5,12 +5,6 @@
 "" | .__/|_|\__,_|\__, |_|_| |_|___/ 
 "" |_|            |___/              
 ""
-" ALE Vim settings, a syntanx linter
-let g:ale_linter_aliases = {'vue': ['vue', 'javascript']}
-let g:ale_linters = {'javascript': ['eslint'], 'vue': ['eslint'], 'python': ['flake8']}
-let g:ale_fixers = {'javascript': ['eslint'], 'vue': ['eslint'], 'python': ['autopep8']}
-let g:ale_fix_on_save = 1
-let g:ale_completion_enabled = 1
 " CtrlP Settings
 let g:ctrlp_user_command = 'fd --type f --hidden --follow --exclude .git'
 " Emmet Settings
@@ -39,3 +33,7 @@ let g:lightline = {
       \   'currentfunction': 'CocCurrentFunction'
       \ },
       \ }
+
+lua << EOF
+require'lspconfig'.pyright.setup{}
+EOF

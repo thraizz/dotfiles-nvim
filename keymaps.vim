@@ -31,21 +31,12 @@ nnoremap <C-s> :Ack!<Space>
 noremap <F9> :!%:p<ENTER>
 
 " LSP Settings
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gh    <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+" Set in plugins.vim
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 
-map <C-l> <Plug>(completion_trigger)
-map <s-l> <Plug>(completion_trigger)
-imap <silent> <C-k> <Plug>(completion_trigger)
+imap <C-o> <Plug>(completion_trigger)
 
 " preserve my pinkies health by using ; for :
 nnoremap ; :

@@ -17,6 +17,7 @@ Plug 'thraizz/git-blame.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'folke/trouble.nvim'
 Plug 'folke/lsp-colors.nvim'
+Plug 'mhinz/vim-startify'
 
 call plug#end()
 

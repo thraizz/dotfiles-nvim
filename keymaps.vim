@@ -1,10 +1,6 @@
 " Escape from insertmode with jj
 imap jj <ESC>:noh<CR>
 " Show current files in Buffer with Ctrl+f,
-" also cycle through ctrl-p with repeated keystroke
-map <C-f> :CtrlPBuffer<CR>
-" Show NERDTree with Ctrl+n
-map <C-n> :NERDTreeToggle<CR>
 " Jump between merge conflicts with F8
 map <silent> <F8> /^\(<\{7\}\\|>\{7\}\\|=\{7\}\\|\|\{7\}\)\( \\|$\)<cr>
 
@@ -32,9 +28,21 @@ noremap <F9> :!%:p<ENTER>
 
 " LSP Settings
 " Set in plugins.vim
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+nnoremap <C-f> <cmd>Telescope buffers sort_lastused=true<cr>
+inoremap <C-f> <cmd>Telescope find_files sort_lastused=true<cr>
+map <C-n> <cmd>Telescope find_files sort_lastused=true<cr>
+map <C-p> <cmd>Telescope oldfiles sort_lastused=true<cr>
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fc <cmd>Telescope current_buffer_fuzzy_find<cr>
+nnoremap <leader>fp <cmd>Telescope oldfiles<cr>
+nnoremap <leader>fs <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers sort_lastused=true<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>gD <cmd>Telescope lsp_implementations<cr>
+nnoremap <leader>gd <cmd>Telescope lsp_definitions<cr>
+nnoremap <leader>gr <cmd>Telescope lsp_references<cr>
 
 imap <C-o> <Plug>(completion_trigger)
 

@@ -5,8 +5,6 @@
 "" | .__/|_|\__,_|\__, |_|_| |_|___/ 
 "" |_|            |___/              
 ""
-" Use fd for finding files with ctrl+p and ignore .git
-let g:ctrlp_user_command = 'fd --type f --hidden --follow --exclude .git'
 let g:indentLine_conceallevel=1
 let g:indentLine_char='·'
 let g:indentLine_enabled=1
@@ -19,6 +17,7 @@ let g:notes_directories = ['~/Documents/Notes']
 
 
 let g:lightline = {
+      \ 'colorscheme': 'tokyonight',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'readonly', 'filename', 'modified' ]
@@ -69,8 +68,6 @@ local servers = { "pyright", "tsserver" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
-
-require'trouble'.setup{}
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] =
     vim.lsp.with(require('lsp_extensions.workspace.diagnostic').handler, {

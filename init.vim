@@ -1,26 +1,26 @@
 call plug#begin('~/.vim/bundle')
 Plug 'xolox/vim-notes'
 Plug 'xolox/vim-misc'
-Plug 'scrooloose/nerdtree'
 Plug 'Yggdroot/indentLine'
-Plug 'dense-analysis/ale'
 Plug 'junegunn/goyo.vim'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fadein/vim-FIGlet'
 Plug 'itchyny/lightline.vim'
 Plug 'vimlab/split-term.vim'
-Plug 'mileszs/ack.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'nvim-lua/lsp_extensions.nvim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
 Plug 'thraizz/git-blame.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'folke/trouble.nvim'
-Plug 'folke/lsp-colors.nvim'
 Plug 'mhinz/vim-startify'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'folke/tokyonight.nvim'
+
 
 call plug#end()
 
+let mapleader=","
 " Set vim configuration path
 let $VIM_CONFIG="$HOME/.config/nvim/"
 " Load plugin configuration
@@ -36,7 +36,7 @@ if (strftime("%H") >= 6 && strftime("%H") < 17 && !exists('$DARK'))
 else
   set background=dark
 endif
-colorscheme gruvbox
+colorscheme tokyonight
 syntax enable
 
 set tabstop=4             " number of visual spaces per TAB
@@ -47,7 +47,7 @@ set autoindent
 set copyindent            " copy indent from the previous line
 set clipboard+=unnamedplus
 set mouse=nv
-set splitbelow
+set splitright
 set relativenumber
 set laststatus=2
 set cursorline
@@ -58,7 +58,7 @@ set showcmd               " show command in bottom bar
 set wildmenu              " visual autocomplete for command menu
 set showmatch             " highlight matching brace
 set incsearch             " search as characters are entered
-set hlsearch              " highlight matche
+set hlsearch              " highlight matches
 "set ignorecase            " ignore case when searching
 set smartcase             " ignore case if search pattern is lower case
 "set foldenable
@@ -69,6 +69,8 @@ set smartcase             " ignore case if search pattern is lower case
 set completeopt=menuone,noinsert,noselect
 " Avoid showing message extra message when using completion
 set shortmess+=c
+set switchbuf=vsplit
+set noshowmode
 
 let g:completion_enable_auto_popup = 0
 " Let our leader be ,

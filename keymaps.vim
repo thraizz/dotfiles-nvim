@@ -19,25 +19,21 @@ cnoremap <C-l> <Right>
 " Reduce tab width with shift tab
 nnoremap <S-Tab> <<
 
-" Don't jump to first match
-cnoreabbrev Ack Ack!
-" Bind Ack to Ctrl+S
-nnoremap <C-s> :Ack!<Space>
 " Run file with F9
 noremap <F9> :!%:p<ENTER>
 
 " LSP Settings
 " Set in plugins.vim
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 nnoremap <C-f> <cmd>Telescope buffers sort_lastused=true<cr>
 inoremap <C-f> <cmd>Telescope find_files sort_lastused=true<cr>
-map <C-n> <cmd>Telescope find_files sort_lastused=true<cr>
+map <C-n> <cmd>Telescope file_browser sort_lastused=true<cr>
 map <C-p> <cmd>Telescope oldfiles sort_lastused=true<cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fc <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap <leader>fp <cmd>Telescope oldfiles<cr>
 nnoremap <leader>fs <cmd>Telescope live_grep<cr>
+xnoremap <leader>fs <cmd>Telescope grep_string<cr>
+nnoremap <leader>fg <cmd>Telescope grep_string<cr>
 nnoremap <leader>fb <cmd>Telescope buffers sort_lastused=true<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>gD <cmd>Telescope lsp_implementations<cr>

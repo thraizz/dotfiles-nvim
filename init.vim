@@ -1,4 +1,5 @@
 call plug#begin('~/.vim/bundle')
+Plug 'mattn/emmet-vim'
 Plug 'xolox/vim-notes'
 Plug 'xolox/vim-misc'
 Plug 'Yggdroot/indentLine'

@@ -17,7 +17,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'mhinz/vim-startify'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'folke/tokyonight.nvim'
-
+Plug 'gruvbox-community/gruvbox'
 
 call plug#end()
 

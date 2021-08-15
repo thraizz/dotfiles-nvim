@@ -36,9 +36,9 @@ xnoremap <leader>fs <cmd>Telescope grep_string<cr>
 nnoremap <leader>fg <cmd>Telescope grep_string<cr>
 nnoremap <leader>fb <cmd>Telescope buffers sort_lastused=true<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <leader>gD <cmd>Telescope lsp_implementations<cr>
-nnoremap <leader>gd <cmd>Telescope lsp_definitions<cr>
-nnoremap <leader>gr <cmd>Telescope lsp_references<cr>
+nnoremap gD <cmd>Telescope lsp_implementations jump_type=never<cr>
+nnoremap gd <cmd>Telescope lsp_definitions jump_type=never<cr>
+nnoremap gr <cmd>Telescope lsp_references<cr>
 
 imap <C-o> <Plug>(completion_trigger)
 

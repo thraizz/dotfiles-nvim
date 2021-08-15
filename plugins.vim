@@ -17,7 +17,6 @@ let g:notes_directories = ['~/Documents/Notes']
 
 
 let g:lightline = {
-      \ 'colorscheme': 'tokyonight',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'readonly', 'filename', 'modified' ]

@@ -37,7 +37,7 @@ if (strftime("%H") >= 6 && strftime("%H") < 17 && !exists('$DARK'))
 else
   set background=dark
 endif
-colorscheme tokyonight
+colorscheme gruvbox
 syntax enable
 
 set tabstop=4             " number of visual spaces per TAB

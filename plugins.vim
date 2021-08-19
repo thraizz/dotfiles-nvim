@@ -62,8 +62,42 @@ local on_attach = function(client, bufnr)
 
 end
 local actions = require('telescope.actions')
-require('telescope').setup{
-  defaults = {
+require("telescope").setup {
+    defaults = {
+        -- vimgrep_arguments = {
+        --     "rg",
+        --     "--no-heading",
+        --     "--with-filename",
+        --     "--line-number",
+        --     "--column",
+        --     "--smart-case",
+        --     "--type-not sql",
+        --     "--type-not pyc",
+        -- },
+        prompt_prefix = ">",
+        initial_mode = "insert",
+        selection_strategy = "reset",
+        sorting_strategy = "descending",
+        layout_strategy = "horizontal",
+        layout_config = {
+            width = 0.9,
+            preview_cutoff = 120,
+            prompt_position = "bottom"
+        },
+        file_sorter = require("telescope.sorters").get_fuzzy_file,
+        file_ignore_patterns = {"venv/"},
+        generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
+        -- winblend = 0,
+        color_devicons = true,
+        -- use_less = true,
+        -- file_previewer = require("telescope.previewers").cat.new,
+        -- grep_previewer = require("telescope.previewers").vimgrep.new,
+        -- qflist_previewer = require("telescope.previewers").qflist.new,
+        -- buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
+        set_env = {
+           ["TERM"] = "xterm-256colors",
+           ["COLORTERM"] = "truecolor"
+        },
     mappings = {
       i = {
         ["<esc>"] = actions.close,
@@ -71,6 +105,8 @@ require('telescope').setup{
         ["<C-k>"] = actions.move_selection_previous,
         ["<C-y>"] = actions.send_to_loclist,
         ["<C-t>"] = actions.send_to_qflist,
+        ["<C-n>"] = actions.cycle_history_next,
+        ["<C-p>"] = actions.cycle_history_prev,
       },
     },
   }

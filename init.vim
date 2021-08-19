@@ -18,6 +18,7 @@ Plug 'mhinz/vim-startify'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'folke/tokyonight.nvim'
 Plug 'gruvbox-community/gruvbox'
+"Plug 'sarumont/golden-ratio'
 
 call plug#end()
 
@@ -36,6 +37,7 @@ if (strftime("%H") >= 6 && strftime("%H") < 17 && !exists('$DARK'))
   set background=light
 else
   set background=dark
+  let g:gruvbox_contrast_dark='hard'
 endif
 colorscheme gruvbox
 syntax enable

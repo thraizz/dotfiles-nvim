@@ -27,7 +27,7 @@ noremap <F9> :!%:p<ENTER>
 nnoremap <C-f> <cmd>Telescope buffers sort_lastused=true<cr>
 inoremap <C-f> <cmd>Telescope find_files sort_lastused=true<cr>
 map <C-n> <cmd>Telescope file_browser sort_lastused=true<cr>
-map <C-p> <cmd>Telescope oldfiles sort_lastused=true<cr>
+map <C-p> <cmd>Telescope oldfiles include_current_session=false<cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fc <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap <leader>fp <cmd>Telescope oldfiles<cr>

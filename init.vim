@@ -18,11 +18,15 @@ Plug 'mhinz/vim-startify'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'folke/tokyonight.nvim'
 Plug 'gruvbox-community/gruvbox'
-"Plug 'sarumont/golden-ratio'
+Plug 'roman/golden-ratio'
 
+Plug 'posva/vim-vue'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
 call plug#end()
 
 let mapleader=","
+" so $HOME/.cache/wal/colors-wal.vim
 " Set vim configuration path
 let $VIM_CONFIG="$HOME/.config/nvim/"
 " Load plugin configuration
@@ -75,6 +79,7 @@ set shortmess+=c
 set switchbuf=vsplit
 set noshowmode
 
+let g:golden_ratio_autocommand = 0
 let g:completion_enable_auto_popup = 0
 " Let our leader be ,
 let mapleader=","

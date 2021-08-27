@@ -14,15 +14,15 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'thraizz/git-blame.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'mhinz/vim-startify'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'folke/tokyonight.nvim'
-Plug 'gruvbox-community/gruvbox'
-Plug 'roman/golden-ratio'
 
 Plug 'posva/vim-vue'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
+  " Window resizer
+  Plug 'sarumont/golden-ratio'
+  " Colorschemes
+  Plug 'gruvbox-community/gruvbox'
 call plug#end()
 
 let mapleader=","
@@ -33,8 +33,6 @@ let $VIM_CONFIG="$HOME/.config/nvim/"
 so $VIM_CONFIG/plugins.vim
 " Load keymaps
 so $VIM_CONFIG/keymaps.vim
-" Load autocommands
-so $VIM_CONFIG/autocommands.vim
 
 
 if (strftime("%H") >= 6 && strftime("%H") < 17 && !exists('$DARK')) 
@@ -46,6 +44,7 @@ endif
 colorscheme gruvbox
 syntax enable
 
+set shell=/bin/bash
 set tabstop=4             " number of visual spaces per TAB
 set softtabstop=2         " number of spaces in tab when editing
 set shiftwidth=2          " number of spaces to use for autoindent

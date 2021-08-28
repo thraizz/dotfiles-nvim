@@ -8,29 +8,11 @@
 let g:indentLine_conceallevel=1
 let g:indentLine_char='·'
 let g:indentLine_enabled=1
-" ACK! Settings
-let g:ackprg = 'rg --vimgrep --type-not sql --smart-case'
-let g:ack_autoclose = 1
-let g:ack_use_cword_for_empty_search = 1
 " Vim-Notes Settings
 let g:notes_directories = ['~/Documents/Notes']
 
 
-let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'filename', 'modified' ]
-      \   ]
-      \ },
-      \ }
-
-
 lua << EOF
-local nvim_lsp = require('lspconfig')
-
--- Use an on_attach function to only map the following keys 
--- after the language server attaches to the current buffer
 local actions = require('telescope.actions')
 require("telescope").setup {
     defaults = {
@@ -65,9 +47,14 @@ require("telescope").setup {
     },
   }
 }
+
+
+
+local nvim_lsp = require('lspconfig')
 -- Use an on_attach function to only map the following keys 
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+  require('completion').on_attach()
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -84,10 +71,18 @@ local servers = { "pyright", "tsserver", "vuels", "phpactor" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
+
+local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
+for type, icon in pairs(signs) do
+  local hl = "LspDiagnosticsSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+end
+
 vim.lsp.handlers['textDocument/publishDiagnostics'] =
     vim.lsp.with(require('lsp_extensions.workspace.diagnostic').handler, {
         underline = false,
         signs = true,
-        update_in_insert = false -- delay update
+        update_in_insert = false, -- delay update
+        severity_sort = true
     })
 EOF

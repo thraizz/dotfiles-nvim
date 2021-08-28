@@ -1,24 +1,24 @@
 call plug#begin('~/.vim/bundle')
-Plug 'mattn/emmet-vim'
-Plug 'xolox/vim-notes'
-Plug 'xolox/vim-misc'
-Plug 'Yggdroot/indentLine'
-Plug 'junegunn/goyo.vim'
-Plug 'fadein/vim-FIGlet'
-Plug 'itchyny/lightline.vim'
-Plug 'vimlab/split-term.vim'
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
-Plug 'nvim-lua/lsp_extensions.nvim'
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'thraizz/git-blame.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'nvim-telescope/telescope.nvim'
-
-Plug 'posva/vim-vue'
-Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
+  Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+  Plug 'mattn/emmet-vim'
+  Plug 'xolox/vim-notes'
+  Plug 'xolox/vim-misc'
+  Plug 'Yggdroot/indentLine'
+  Plug 'junegunn/goyo.vim'
+  Plug 'fadein/vim-FIGlet'
+  Plug 'vimlab/split-term.vim'
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-lua/completion-nvim'
+  Plug 'nvim-lua/lsp_extensions.nvim'
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'thraizz/git-blame.nvim'
+  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'nvim-telescope/telescope.nvim'
+  
+  Plug 'posva/vim-vue'
+  Plug 'mxw/vim-jsx'
+  Plug 'pangloss/vim-javascript'
   " Window resizer
   Plug 'sarumont/golden-ratio'
   " Colorschemes
@@ -33,6 +33,7 @@ let $VIM_CONFIG="$HOME/.config/nvim/"
 so $VIM_CONFIG/plugins.vim
 " Load keymaps
 so $VIM_CONFIG/keymaps.vim
+so $VIM_CONFIG/eviline.lua
 
 
 if (strftime("%H") >= 6 && strftime("%H") < 17 && !exists('$DARK')) 
@@ -79,7 +80,6 @@ set switchbuf=vsplit
 set noshowmode
 
 let g:golden_ratio_autocommand = 0
-let g:completion_enable_auto_popup = 0
 " Let our leader be ,
 let mapleader=","
 filetype plugin on

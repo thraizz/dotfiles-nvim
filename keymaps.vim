@@ -23,6 +23,7 @@ nnoremap <S-Tab> <<
 noremap <F9> :!%:p<ENTER>
 
 nnoremap  <C-f>      <cmd>Telescope buffers sort_lastused=true<cr>
+inoremap  <C-f>      <cmd>Telescope find_files sort_lastused=true<cr>
 map       <C-n>      <cmd>Telescope file_browser sort_lastused=true<cr>
 map       <C-p>      <cmd>Telescope oldfiles include_current_session=True<cr>
 nnoremap  <leader>ff <cmd>Telescope find_files sort_lastused=true<cr>
@@ -47,7 +48,6 @@ nnoremap <space>wl   <cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folde
 nnoremap <space>D    <cmd>lua vim.lsp.buf.type_definition()<cr>
 nnoremap <space>rn   <cmd>lua vim.lsp.buf.rename()<cr>
 nnoremap <space>ca   <cmd>lua vim.lsp.buf.code_action()<cr>
-
-imap <C-o>         <Plug>(completion_trigger)
+imap <C-o>           <Plug>(completion_trigger)
 " preserve my pinkies health by using ; for :
 nnoremap ; :

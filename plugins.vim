@@ -30,10 +30,6 @@ require("telescope").setup {
         file_ignore_patterns = {"venv/"},
         generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
         color_devicons = true,
-        set_env = {
-           ["TERM"] = "xterm-256colors",
-           ["COLORTERM"] = "truecolor"
-        },
     mappings = {
       i = {
         ["<esc>"] = actions.close,
@@ -49,8 +45,9 @@ require("telescope").setup {
 }
 
 
-
 local nvim_lsp = require('lspconfig')
+local lsp_status = require('lsp-status')
+lsp_status.register_progress()
 -- Use an on_attach function to only map the following keys 
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -69,7 +66,10 @@ end
 -- map buffer local keybindings when the language server attaches
 local servers = { "pyright", "tsserver", "vuels", "phpactor" }
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup { on_attach = on_attach }
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    capabilities = lsp_status.capabilities
+    }
 end
 
 local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
@@ -77,6 +77,31 @@ for type, icon in pairs(signs) do
   local hl = "LspDiagnosticsSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
+
+function LspStatus()
+    if #vim.lsp.buf_get_clients() < 1 then return "" end
+
+    return lsp_status.status()
+end
+require'lualine'.setup{
+    options = { theme  = 'gruvbox' },
+    sections = {
+        lualine_a = {{'mode', upper = true}},
+        lualine_b = {{'branch', icon = ''}, 'diff'},
+        lualine_c = {{'filename', file_status = true, full_path = true}, require'lsp-status'.status},
+        lualine_x = {'encoding', 'fileformat', 'filetype'},
+        lualine_y = {'progress'},
+        lualine_z = {'location'}
+    },
+    inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {'filename'},
+        lualine_x = {'location'},
+        lualine_y = {},
+        lualine_z = {}
+    },
+}
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] =
     vim.lsp.with(require('lsp_extensions.workspace.diagnostic').handler, {

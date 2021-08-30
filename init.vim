@@ -1,5 +1,5 @@
 call plug#begin('~/.vim/bundle')
-  Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+  Plug 'hoob3rt/lualine.nvim'
   Plug 'mattn/emmet-vim'
   Plug 'xolox/vim-notes'
   Plug 'xolox/vim-misc'
@@ -12,6 +12,8 @@ call plug#begin('~/.vim/bundle')
   Plug 'nvim-lua/lsp_extensions.nvim'
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-lua/lsp-status.nvim'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'thraizz/git-blame.nvim'
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'nvim-telescope/telescope.nvim'
@@ -33,7 +35,6 @@ let $VIM_CONFIG="$HOME/.config/nvim/"
 so $VIM_CONFIG/plugins.vim
 " Load keymaps
 so $VIM_CONFIG/keymaps.vim
-so $VIM_CONFIG/eviline.lua
 
 
 if (strftime("%H") >= 6 && strftime("%H") < 17 && !exists('$DARK')) 

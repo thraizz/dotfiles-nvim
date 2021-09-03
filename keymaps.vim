@@ -22,7 +22,7 @@ nnoremap <S-Tab> <<
 " Run file with F9
 noremap <F9> :!%:p<ENTER>
 
-nnoremap  <C-f>      <cmd>Telescope buffers sort_lastused=true<cr>
+nnoremap  <C-f>      <cmd>Telescope oldfiles cwd_only=true sort_lastused=true<cr>
 inoremap  <C-f>      <cmd>Telescope find_files sort_lastused=true<cr>
 map       <C-n>      <cmd>Telescope file_browser sort_lastused=true<cr>
 map       <C-p>      <cmd>Telescope oldfiles include_current_session=True<cr>
@@ -36,6 +36,8 @@ nnoremap  <leader>fn <cmd>Telescope find_files cwd=~/Documents/Notes<cr>
 nnoremap  <leader>fd <cmd>Telescope lsp_workspace_diagnostics<cr>
 nnoremap  gD         <cmd>Telescope lsp_implementations jump_type=never<cr>
 nnoremap  gd         <cmd>Telescope lsp_definitions jump_type=never<cr>
+nnoremap  gs         <cmd>Telescope lsp_document_symbols jump_type=never<cr>
+nnoremap  gw         <cmd>Telescope lsp_dynamic_workspace_symbols jump_type=never<cr>
 nnoremap  gr         <cmd>Telescope lsp_references<cr>
 " Resize with ,,r
 nnoremap  <leader>r  <cmd>GoldenRatioResize<cr>

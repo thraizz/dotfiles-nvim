@@ -23,7 +23,6 @@ nnoremap <S-Tab> <<
 noremap <F9> :!%:p<ENTER>
 
 nnoremap  <C-f>      <cmd>Telescope oldfiles cwd_only=true sort_lastused=true<cr>
-inoremap  <C-f>      <cmd>Telescope find_files sort_lastused=true<cr>
 map       <C-n>      <cmd>Telescope file_browser sort_lastused=true<cr>
 map       <C-p>      <cmd>Telescope oldfiles include_current_session=True<cr>
 nnoremap  <leader>ff <cmd>Telescope find_files sort_lastused=true<cr>
@@ -31,13 +30,16 @@ nnoremap  <leader>fc <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap  <leader>fp <cmd>Telescope oldfiles<cr>
 nnoremap  <leader>fs <cmd>Telescope live_grep<cr>
 xnoremap  <leader>fs <cmd>Telescope grep_string<cr>
+xnoremap  <leader>fs y<cmd>Telescope grep_string<cr><c-r>"
 nnoremap  <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap  <leader>fn <cmd>Telescope find_files cwd=~/Documents/Notes<cr>
-nnoremap  <leader>fd <cmd>Telescope lsp_workspace_diagnostics<cr>
+nnoremap  <leader>fd  <cmd>lua require'telescope.builtin'.lsp_workspace_diagnostics(require('telescope.themes').get_dropdown({layout_config = {width=0.9}}), {line_width=100})<cr>
+
 nnoremap  gD         <cmd>Telescope lsp_implementations jump_type=never<cr>
 nnoremap  gd         <cmd>Telescope lsp_definitions jump_type=never<cr>
 nnoremap  gs         <cmd>Telescope lsp_document_symbols jump_type=never<cr>
 nnoremap  gw         <cmd>Telescope lsp_dynamic_workspace_symbols jump_type=never<cr>
+xnoremap  gw        y<cmd>Telescope lsp_workspace_symbols query=<c-r>"<cr>
 nnoremap  gr         <cmd>Telescope lsp_references<cr>
 " Resize with ,,r
 nnoremap  <leader>r  <cmd>GoldenRatioResize<cr>

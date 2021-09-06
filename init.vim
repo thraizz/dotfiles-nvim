@@ -22,7 +22,8 @@ call plug#begin('~/.vim/bundle')
   Plug 'mxw/vim-jsx'
   Plug 'pangloss/vim-javascript'
   " Window resizer
-  Plug 'sarumont/golden-ratio'
+  " Plug 'sarumont/golden-ratio'
+  Plug 'beauwilliams/focus.nvim'
   " Colorschemes
   Plug 'gruvbox-community/gruvbox'
 call plug#end()
@@ -66,8 +67,7 @@ set showcmd               " show command in bottom bar
 set wildmenu              " visual autocomplete for command menu
 set showmatch             " highlight matching brace
 set incsearch             " search as characters are entered
-set hlsearch              " highlight matches
-"set ignorecase            " ignore case when searching
+"set hlsearch              " highlight matches
 set smartcase             " ignore case if search pattern is lower case
 "set foldenable
 "set foldlevelstart=10     " default folding level when buffer is opened
@@ -76,11 +76,12 @@ set smartcase             " ignore case if search pattern is lower case
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
 " Avoid showing message extra message when using completion
-set shortmess+=c
+" set shortmess+=c
 set switchbuf=vsplit
 set noshowmode
 
 let g:golden_ratio_autocommand = 0
+let g:completion_enable_auto_popup = 1
 " Let our leader be ,
 let mapleader=","
 filetype plugin on

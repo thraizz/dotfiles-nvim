@@ -1,23 +1,34 @@
 call plug#begin('~/.vim/bundle')
-  Plug 'hoob3rt/lualine.nvim'
   Plug 'mattn/emmet-vim'
   Plug 'xolox/vim-notes'
   Plug 'xolox/vim-misc'
   Plug 'Yggdroot/indentLine'
   Plug 'junegunn/goyo.vim'
   Plug 'fadein/vim-FIGlet'
+
   Plug 'vimlab/split-term.vim'
+
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
   Plug 'neovim/nvim-lspconfig'
-  Plug 'nvim-lua/completion-nvim'
+  Plug 'onsails/lspkind-nvim'
   Plug 'nvim-lua/lsp_extensions.nvim'
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-lua/lsp-status.nvim'
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'saadparwaiz1/cmp_luasnip'
+  Plug 'L3MON4D3/LuaSnip'
+
+  Plug 'hoob3rt/lualine.nvim'
+
   Plug 'thraizz/git-blame.nvim'
+
   Plug 'kyazdani42/nvim-web-devicons'
+
   Plug 'nvim-telescope/telescope.nvim'
-  
+
   Plug 'posva/vim-vue'
   Plug 'mxw/vim-jsx'
   Plug 'pangloss/vim-javascript'
@@ -29,7 +40,6 @@ call plug#begin('~/.vim/bundle')
 call plug#end()
 
 let mapleader=","
-" so $HOME/.cache/wal/colors-wal.vim
 " Set vim configuration path
 let $VIM_CONFIG="$HOME/.config/nvim/"
 " Load plugin configuration
@@ -80,8 +90,6 @@ set completeopt=menuone,noinsert,noselect
 set switchbuf=vsplit
 set noshowmode
 
-let g:golden_ratio_autocommand = 0
-let g:completion_enable_auto_popup = 1
 " Let our leader be ,
 let mapleader=","
 filetype plugin on

@@ -1,18 +1,10 @@
-""        _             _            
-""  _ __ | |_   _  __ _(_)_ __  ___  
-"" | '_ \| | | | |/ _` | | '_ \/ __| 
-"" | |_) | | |_| | (_| | | | | \__ \ 
-"" | .__/|_|\__,_|\__, |_|_| |_|___/ 
-"" |_|            |___/              
-""
-let g:indentLine_conceallevel=1
-let g:indentLine_char='·'
-let g:indentLine_enabled=1
-" Vim-Notes Settings
-let g:notes_directories = ['~/Documents/Notes']
-
-
-lua << EOF
+--        _             _            
+--  _ __ | |_   _  __ _(_)_ __  ___  
+-- | '_ \| | | | |/ _` | | '_ \/ __| 
+-- | |_) | | |_| | (_| | | | | \__ \ 
+-- | .__/|_|\__,_|\__, |_|_| |_|___/ 
+-- |_|            |___/              
+--
 local actions = require('telescope.actions')
 require("telescope").setup {
     defaults = {
@@ -210,4 +202,3 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] =
         update_in_insert = false, -- delay update
         severity_sort = true
     })
-EOF

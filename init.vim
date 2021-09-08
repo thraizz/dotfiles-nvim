@@ -45,7 +45,8 @@ let mapleader=","
 " Set vim configuration path
 let $VIM_CONFIG="$HOME/.config/nvim/"
 " Load plugin configuration
-so $VIM_CONFIG/plugins.vim
+" so $VIM_CONFIG/plugins.vim
+lua require('plugins')
 " Load keymaps
 so $VIM_CONFIG/keymaps.vim
 

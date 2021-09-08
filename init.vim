@@ -36,6 +36,8 @@ call plug#begin('~/.vim/bundle')
   " Plug 'sarumont/golden-ratio'
   Plug 'beauwilliams/focus.nvim'
   " Colorschemes
+  Plug 'RRethy/nvim-base16'
+  Plug 'folke/tokyonight.nvim'
   Plug 'gruvbox-community/gruvbox'
 call plug#end()
 
@@ -48,13 +50,8 @@ so $VIM_CONFIG/plugins.vim
 so $VIM_CONFIG/keymaps.vim
 
 
-if (strftime("%H") >= 6 && strftime("%H") < 17 && !exists('$DARK')) 
-  set background=light
-else
-  set background=dark
-  let g:gruvbox_contrast_dark='hard'
-endif
-colorscheme gruvbox
+set background=dark
+colorscheme base16-gruvbox-dark-hard
 syntax enable
 
 set shell=/bin/bash
@@ -79,16 +76,18 @@ set showmatch             " highlight matching brace
 set incsearch             " search as characters are entered
 "set hlsearch              " highlight matches
 set smartcase             " ignore case if search pattern is lower case
-"set foldenable
-"set foldlevelstart=10     " default folding level when buffer is opened
-"set foldnestmax=10        " maximum nested fold
-"set foldmethod=manual     " fold manual
+set foldenable
+set foldlevelstart=10     " default folding level when buffer is opened
+set foldnestmax=10        " maximum nested fold
+set foldmethod=expr     " fold manual
+set foldexpr=nvim_treesitter#foldexpr()
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
 " Avoid showing message extra message when using completion
 " set shortmess+=c
 set switchbuf=vsplit
 set noshowmode
+set listchars+=eol:↴
 
 " Let our leader be ,
 let mapleader=","

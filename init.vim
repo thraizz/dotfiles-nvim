@@ -22,6 +22,7 @@ call plug#begin('~/.vim/bundle')
   Plug 'L3MON4D3/LuaSnip'
 
   Plug 'hoob3rt/lualine.nvim'
+  Plug 'akinsho/bufferline.nvim'
 
   Plug 'thraizz/git-blame.nvim'
 
@@ -57,6 +58,7 @@ colorscheme base16-gruvbox-dark-hard
 syntax enable
 
 " Various preferences
+set termguicolors
 set shell=/bin/bash
 set tabstop=4             " number of visual spaces per TAB
 set softtabstop=2         " number of spaces in tab when editing
@@ -90,3 +92,4 @@ set shortmess+=c
 set switchbuf=vsplit
 set noshowmode
 set listchars+=eol:↴
+let g:notes_directories = ['~/Documents/Notes']

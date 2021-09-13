@@ -10,6 +10,8 @@
 -- vim.g.indentLine_enabled=1
 -- -- Vim-Notes Settings
 -- vim.g.notes_directories = ['~/Documents/Notes']
+--
+require("bufferline").setup{}
 local actions = require('telescope.actions')
 require("telescope").setup {
     defaults = {
@@ -33,7 +35,7 @@ require("telescope").setup {
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
         ["<C-y>"] = actions.send_to_loclist,
-        ["<C-t>"] = actions.send_to_qflist,
+        ["<C-t>"] = actions.select_tab,
         ["<C-n>"] = actions.cycle_history_next,
         ["<C-p>"] = actions.cycle_history_prev,
       },

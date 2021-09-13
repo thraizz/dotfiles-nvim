@@ -5,6 +5,11 @@
 -- | .__/|_|\__,_|\__, |_|_| |_|___/ 
 -- |_|            |___/              
 --
+-- vim.g.indentLine_conceallevel=1
+-- vim.g.indentLine_char='·'
+-- vim.g.indentLine_enabled=1
+-- -- Vim-Notes Settings
+-- vim.g.notes_directories = ['~/Documents/Notes']
 local actions = require('telescope.actions')
 require("telescope").setup {
     defaults = {
@@ -92,23 +97,10 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
---local on_attach = function(client, bufnr)
---  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
---  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
---
---  --Enable completion triggered by <c-x><c-o>
---  --buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
---
---  -- Mappings.
---  local opts = { noremap=true, silent=true }
---
---end
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
+
 local servers = { "pyright", "tsserver", "vuels", "phpactor" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
---    on_attach = on_attach,
     capabilities = lsp_status.capabilities
     }
 end
@@ -172,9 +164,9 @@ end
 
 function LspStatus()
     if #vim.lsp.buf_get_clients() < 1 then return "" end
-
     return lsp_status.status()
 end
+
 require'lualine'.setup{
     options = { theme  = 'gruvbox' },
     sections = {

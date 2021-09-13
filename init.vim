@@ -41,20 +41,22 @@ call plug#begin('~/.vim/bundle')
   Plug 'gruvbox-community/gruvbox'
 call plug#end()
 
+" Let our leader be ,
 let mapleader=","
+filetype plugin on
+
 " Set vim configuration path
 let $VIM_CONFIG="$HOME/.config/nvim/"
-" Load plugin configuration
-" so $VIM_CONFIG/plugins.vim
-lua require('plugins')
 " Load keymaps
 so $VIM_CONFIG/keymaps.vim
-
+" Load plugin configuration
+lua require('plugins')
 
 set background=dark
 colorscheme base16-gruvbox-dark-hard
 syntax enable
 
+" Various preferences
 set shell=/bin/bash
 set tabstop=4             " number of visual spaces per TAB
 set softtabstop=2         " number of spaces in tab when editing
@@ -75,7 +77,6 @@ set showcmd               " show command in bottom bar
 set wildmenu              " visual autocomplete for command menu
 set showmatch             " highlight matching brace
 set incsearch             " search as characters are entered
-"set hlsearch              " highlight matches
 set smartcase             " ignore case if search pattern is lower case
 set foldenable
 set foldlevelstart=10     " default folding level when buffer is opened
@@ -85,11 +86,7 @@ set foldexpr=nvim_treesitter#foldexpr()
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
 " Avoid showing message extra message when using completion
-" set shortmess+=c
+set shortmess+=c
 set switchbuf=vsplit
 set noshowmode
 set listchars+=eol:↴
-
-" Let our leader be ,
-let mapleader=","
-filetype plugin on

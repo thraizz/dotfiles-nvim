@@ -24,6 +24,7 @@ nnoremap <S-Tab> <<
 noremap <F9> :!%:p<ENTER>
 
 nnoremap  <C-f>      <cmd>Telescope oldfiles cwd_only=true sort_lastused=true<cr>
+nnoremap  <C-o>      <cmd>Telescope buffers sort_lastused=true<cr>
 map       <C-n>      <cmd>Telescope file_browser sort_lastused=true cwd=%:p:h<cr>
 map       <C-p>      <cmd>Telescope oldfiles include_current_session=true<cr>
 nnoremap  <leader>ff <cmd>Telescope find_files sort_lastused=true<cr>

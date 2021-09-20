@@ -10,7 +10,7 @@
 -- vim.g.indentLine_enabled=1
 -- -- Vim-Notes Settings
 -- vim.g.notes_directories = ['~/Documents/Notes']
---
+require("focus").setup()
 require("bufferline").setup{}
 local actions = require('telescope.actions')
 require("telescope").setup {

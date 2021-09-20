@@ -25,6 +25,7 @@ call plug#begin('~/.vim/bundle')
   Plug 'akinsho/bufferline.nvim'
 
   Plug 'thraizz/git-blame.nvim'
+  Plug 'tpope/vim-fugitive'
 
   Plug 'kyazdani42/nvim-web-devicons'
 

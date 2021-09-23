@@ -35,24 +35,20 @@ xnoremap  <leader>fs <cmd>Telescope grep_string<cr>
 xnoremap  <leader>fs y<cmd>Telescope grep_string<cr><c-r>"
 nnoremap  <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap  <leader>fn <cmd>Telescope find_files cwd=~/Documents/Notes<cr>
-nnoremap  <leader>fd  <cmd>lua require'telescope.builtin'.lsp_workspace_diagnostics(require('telescope.themes').get_dropdown({layout_config = {width=0.9}}), {line_width=100})<cr>
+nnoremap  <leader>fd <cmd>lua require'telescope.builtin'.lsp_workspace_diagnostics(require('telescope.themes').get_dropdown({layout_config = {width=0.9}}), {line_width=100})<cr>
 
-nnoremap  gD         <cmd>Telescope lsp_implementations jump_type=never<cr>
-nnoremap  gd         <cmd>Telescope lsp_definitions jump_type=never<cr>
-nnoremap  gs         <cmd>Telescope lsp_document_symbols jump_type=never<cr>
-nnoremap  gw         <cmd>Telescope lsp_dynamic_workspace_symbols jump_type=never<cr>
-xnoremap  gw        y<cmd>Telescope lsp_workspace_symbols query=<c-r>"<cr>
-nnoremap  gr         <cmd>Telescope lsp_references<cr>
-" Resize with ,,r
-nnoremap  <leader>r  <cmd>GoldenRatioResize<cr>
+" LSP Commands start with ,l
+nnoremap  <leader>lD <cmd>Telescope lsp_implementations jump_type=never<cr>
+nnoremap  <leader>ld <cmd>Telescope lsp_definitions jump_type=never<cr>
+nnoremap  <leader>ls <cmd>Telescope lsp_document_symbols jump_type=never<cr>
+nnoremap  <leader>lw <cmd>Telescope lsp_dynamic_workspace_symbols jump_type=never<cr>
+xnoremap  <leader>lw y<cmd>Telescope lsp_workspace_symbols query=<c-r>"<cr>
+nnoremap  <leader>lr <cmd>Telescope lsp_references<cr>
 " LSP Settings
 nnoremap  K          <cmd>lua vim.lsp.buf.hover()<cr>
-nnoremap  <C-l>      <cmd>lua vim.lsp.buf.signature_help()<cr>
-nnoremap <space>wa   <cmd>lua vim.lsp.buf.add_workspace_folder()<cr>
-nnoremap <space>wr   <cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>
-nnoremap <space>wl   <cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<cr>
-nnoremap <space>D    <cmd>lua vim.lsp.buf.type_definition()<cr>
-nnoremap <space>rn   <cmd>lua vim.lsp.buf.rename()<cr>
-nnoremap <space>ca   <cmd>lua vim.lsp.buf.code_action()<cr>
+
+" Git commands start with ,g
+nnoremap  <leader>gs <cmd>vertical Git<cr>
+
 " preserve my pinkies health by using ; for :
 nnoremap ; :

@@ -100,6 +100,8 @@ cmp.setup {
   },
 }
 
+require("luasnip.loaders.from_vscode").load()
+
 local servers = { "pyright", "tsserver", "vuels", "phpactor" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {

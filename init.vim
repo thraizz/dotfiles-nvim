@@ -18,6 +18,7 @@ call plug#begin('~/.vim/bundle')
   Plug 'nvim-lua/lsp-status.nvim'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'rafamadriz/friendly-snippets'
   Plug 'saadparwaiz1/cmp_luasnip'
   Plug 'L3MON4D3/LuaSnip'
 
@@ -35,7 +36,6 @@ call plug#begin('~/.vim/bundle')
   Plug 'mxw/vim-jsx'
   Plug 'pangloss/vim-javascript'
   " Window resizer
-  " Plug 'sarumont/golden-ratio'
   Plug 'beauwilliams/focus.nvim'
   " Colorschemes
   Plug 'RRethy/nvim-base16'

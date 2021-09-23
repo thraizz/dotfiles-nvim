@@ -36,6 +36,8 @@ xnoremap  <leader>fs y<cmd>Telescope grep_string<cr><c-r>"
 nnoremap  <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap  <leader>fn <cmd>Telescope find_files cwd=~/Documents/Notes<cr>
 nnoremap  <leader>fd <cmd>lua require'telescope.builtin'.lsp_workspace_diagnostics(require('telescope.themes').get_dropdown({layout_config = {width=0.9}}), {line_width=100})<cr>
+nnoremap  <leader>fm <cmd>Telescope marks<cr>
+nnoremap  <leader>fl <cmd>Telescope jumplist<cr>
 
 " LSP Commands start with ,l
 nnoremap  <leader>lD <cmd>Telescope lsp_implementations jump_type=never<cr>
@@ -49,6 +51,7 @@ nnoremap  K          <cmd>lua vim.lsp.buf.hover()<cr>
 
 " Git commands start with ,g
 nnoremap  <leader>gs <cmd>vertical Git<cr>
+nnoremap  <leader>gd <cmd>vertical Gdiff<cr>
 
 " preserve my pinkies health by using ; for :
 nnoremap ; :

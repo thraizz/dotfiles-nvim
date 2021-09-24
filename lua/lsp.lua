@@ -25,7 +25,7 @@ nvim_lsp.tsserver.setup {
         client.resolved_capabilities.document_formatting = false
         client.resolved_capabilities.document_range_formatting = false
         local ts_utils = require("nvim-lsp-ts-utils")
-	ts_utils.setup {
+	    ts_utils.setup {
             debug = false,
             disable_commands = false,
             enable_import_on_completion = false,
@@ -44,13 +44,13 @@ nvim_lsp.tsserver.setup {
             -- eslint
             eslint_enable_code_actions = true,
             eslint_enable_disable_comments = true,
-            eslint_bin = "eslint",
+            eslint_bin = "eslint_d",
             eslint_enable_diagnostics = true,
             eslint_opts = {},
 
             -- formatting
             enable_formatting = true,
-            formatter = "prettier",
+            formatter = "eslint_d",
             formatter_opts = {},
 
             -- update imports on file move
@@ -63,14 +63,8 @@ nvim_lsp.tsserver.setup {
             filter_out_diagnostics_by_code = {},
         }
 
-        -- required to fix code action ranges and filter diagnostics
         ts_utils.setup_client(client)
-
-        -- no default maps, so you may want to define some here
-        local opts = { silent = true }
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":TSLspOrganize<CR>", opts)
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", opts)
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
+        vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
     end
 }
 

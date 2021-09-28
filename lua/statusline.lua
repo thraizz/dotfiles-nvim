@@ -1,18 +1,14 @@
+local gps = require("nvim-gps")
+gps.setup()
 -- lualine setup
-local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
-for type, icon in pairs(signs) do
-  local hl = "LspDiagnosticsSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
-
 require("lualine").setup{
     options = { theme  = 'material-nvim' },
     sections = {
         lualine_a = {{'mode', upper = true}},
         lualine_b = {{'branch', icon = ''}, 'diff'},
-        lualine_c = {{'filename', file_status = true, full_path = true}, require'lsp-status'.status},
+        lualine_c = {{'filename', file_status = true, full_path = true}, { gps.get_location, condition = gps.is_available } },
         lualine_x = {'encoding', 'fileformat', 'filetype'},
-        lualine_y = {'progress'},
+		lualine_y = { require'lsp-status'.status },
         lualine_z = {'location'}
     },
     inactive_sections = {

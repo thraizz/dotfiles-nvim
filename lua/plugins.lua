@@ -4,6 +4,10 @@ return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   -- Emmet foo in <p>foo</p> with <C-y>,
   use 'mattn/emmet-vim'
+  use 'tpope/vim-surround'
+  use 'tpope/vim-repeat'
+  -- Jump anywhere easy
+  use 'justinmk/vim-sneak'
   -- Note taking with :Note something
   use 'xolox/vim-notes'
   use 'xolox/vim-misc'
@@ -20,6 +24,7 @@ return require('packer').startup(function()
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
+  use 'SmiteshP/nvim-gps'
   -- LSP Configuration
   use 'neovim/nvim-lspconfig'
   use 'nvim-lua/lsp_extensions.nvim'

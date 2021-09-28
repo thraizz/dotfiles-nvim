@@ -1,3 +1,4 @@
+require("null-ls").config {}
 local nvim_lsp = require('lspconfig')
 local lsp_status = require('lsp-status')
 lsp_status.register_progress()
@@ -9,15 +10,12 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] =
         update_in_insert = false, -- delay update
         severity_sort = true
     })
-local servers = { "pyright", "vuels", "phpactor" }
+local servers = { "pyright", "vuels", "phpactor", "null-ls" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     capabilities = lsp_status.capabilities
     }
 end
-
-require("null-ls").config {}
-require("lspconfig")["null-ls"].setup {}
 
 nvim_lsp.tsserver.setup {
   capabilities = lsp_status.capabilities,

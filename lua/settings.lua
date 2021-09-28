@@ -9,7 +9,7 @@ g.indentLine_conceallevel=1
 g.indentLine_char='·'
 g.indentLine_enabled=1
 
---g.notes_directories = ['~/Documents/Notes']
+g.notes_directories = {'~/Documents/Notes'}
 
 g.material_style = "darker"
 cmd('syntax enable')

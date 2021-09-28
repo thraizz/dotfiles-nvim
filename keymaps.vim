@@ -23,16 +23,18 @@ nnoremap <S-Tab> <<
 " Run file with F9
 noremap <F9> :!%:p<ENTER>
 
-nnoremap  <C-d>      <cmd>Telescope buffers sort_mru=true<cr>
+" Telescope commands start with ,f
+nnoremap  <C-d>      <cmd>Telescope buffers sort_lastused=true sort_mru=true<cr>
 nnoremap  <C-f>      <cmd>Telescope oldfiles cwd_only=true sort_lastused=true<cr>
 map       <C-n>      <cmd>Telescope file_browser sort_lastused=true cwd=%:p:h<cr>
 map       <C-p>      <cmd>Telescope oldfiles include_current_session=true<cr>
 nnoremap  <leader>ff <cmd>Telescope find_files sort_lastused=true<cr>
+xnoremap  <leader>ff y<cmd>Telescope find_files<cr><c-r>"
 nnoremap  <leader>fc <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap  <leader>fp <cmd>Telescope oldfiles<cr>
 nnoremap  <leader>fs <cmd>Telescope live_grep<cr>
-xnoremap  <leader>fs <cmd>Telescope grep_string<cr>
-xnoremap  <leader>fs y<cmd>Telescope grep_string<cr><c-r>"
+xnoremap  <leader>fs y<cmd>Telescope live_grep<cr><c-r>"
+nnoremap  <leader>ft <cmd>Telescope live_grep<cr>FIXME\|TODO
 nnoremap  <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap  <leader>fn <cmd>Telescope find_files cwd=~/Documents/Notes<cr>
 nnoremap  <leader>fd <cmd>lua require'telescope.builtin'.lsp_workspace_diagnostics(require('telescope.themes').get_dropdown({layout_config = {width=0.9}}), {line_width=100})<cr>

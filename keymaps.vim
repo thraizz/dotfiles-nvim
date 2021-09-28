@@ -52,8 +52,10 @@ nnoremap  <leader>lr <cmd>Telescope lsp_references<cr>
 nnoremap  K          <cmd>lua vim.lsp.buf.hover()<cr>
 
 " Git commands start with ,g
-nnoremap  <leader>gs <cmd>vertical Git<cr>
-nnoremap  <leader>gd <cmd>vertical Gdiff<cr>
+nnoremap  <leader>gs  <cmd>vertical Git<cr>
+nnoremap  <leader>gd  <cmd>vertical Gdiffsplit<cr>
+nnoremap  <leader>gfa <cmd>Git fetch --all<cr>
+nnoremap  <leader>gc   <cmd>Git commit -v<cr>
 
 " preserve my pinkies health by using ; for :
 nnoremap ; :

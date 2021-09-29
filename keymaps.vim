@@ -5,10 +5,10 @@ imap jj <ESC>:noh<CR>
 nnoremap ; :
 
 " Navigate with Ctrl+h,j,k,l
-map <C-h> <Left>
-map <C-j> <Down>
-map <C-k> <Up>
-map <C-l> <Right>
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
 
 " Reduce tab width with shift tab
 nnoremap <S-Tab> <<

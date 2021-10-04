@@ -48,6 +48,7 @@ nnoremap  <leader>gs  <cmd>vertical Git<cr>
 nnoremap  <leader>gd  <cmd>vertical Gdiffsplit<cr>
 nnoremap  <leader>gfa <cmd>Git fetch --all<cr>
 nnoremap  <leader>gc   <cmd>Git commit -v<cr>
+nnoremap  <leader>ga   <cmd>Git add %<cr>
 " Jump between merge conflicts with F8
 map <silent> <F8> /^\(<\{7\}\\|>\{7\}\\|=\{7\}\\|\|\{7\}\)\( \\|$\)<cr>
 

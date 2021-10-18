@@ -8,6 +8,7 @@ require "treesitter"
 require "settings"
 
 require("focus").setup()
+require('dap-python').setup('/usr/bin/python')
 
 vim.api.nvim_set_keymap('n', ',', '', {})
 vim.g.mapleader = ','

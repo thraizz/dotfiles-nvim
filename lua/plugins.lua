@@ -54,6 +54,11 @@ return require('packer').startup(function()
   use 'kyazdani42/nvim-web-devicons'
   -- Searcher+Picker
   use 'nvim-telescope/telescope.nvim'
+  -- Debugger
+  use 'mfussenegger/nvim-dap'
+  -- Python Debugger
+  -- requires debugpy!
+  use 'mfussenegger/nvim-dap-python'
   -- JS/TS specific LSP configuration
   use 'jose-elias-alvarez/nvim-lsp-ts-utils'
   use 'jose-elias-alvarez/null-ls.nvim'

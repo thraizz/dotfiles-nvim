@@ -10,12 +10,20 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] =
         update_in_insert = false, -- delay update
         severity_sort = true
     })
-local servers = { "pyright", "vuels", "phpactor", "null-ls" }
+local servers = { "vuels", "phpactor", "null-ls" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     capabilities = lsp_status.capabilities
     }
 end
+
+nvim_lsp.pyright.setup {
+  capabilities = lsp_status.capabilities,
+  on_attach = function(client)
+    require('dap-python').test_runner = 'pytest'
+    vim.api.nvim_set_keymap('n', ',ft', ":lua require('dap-python').test_method()<cr>", {})
+  end
+}
 
 nvim_lsp.tsserver.setup {
   capabilities = lsp_status.capabilities,

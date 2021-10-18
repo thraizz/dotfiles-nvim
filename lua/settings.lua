@@ -8,10 +8,10 @@ g.indent_blankline_show_first_indent_level = false
 g.indentLine_conceallevel=1
 g.indentLine_char='·'
 g.indentLine_enabled=1
+g.indentLine_fileTypeExclude= {"notes"}
 
 g.notes_directories = {'~/Documents/Notes'}
 
-g.material_style = "darker"
 cmd('syntax enable')
 cmd('syntax on')
 
@@ -38,11 +38,11 @@ cmd('set wildmenu')
 cmd('set showmatch')
 cmd('set incsearch')
 cmd('set smartcase')
-cmd('set foldenable')
-cmd('set foldlevelstart=10')
-cmd('set foldnestmax=10')
-cmd('set foldmethod=expr')
-cmd('set foldexpr=nvim_treesitter#foldexpr()')
+--cmd('set foldenable')
+--cmd('set foldlevelstart=10')
+--cmd('set foldnestmax=10')
+--cmd('set foldmethod=expr')
+--cmd('set foldexpr=nvim_treesitter#foldexpr()')
 cmd('set completeopt=menuone,noinsert,noselect')
 cmd('set shortmess+=c')
 cmd('set switchbuf=vsplit')

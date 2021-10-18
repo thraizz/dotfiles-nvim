@@ -27,7 +27,6 @@ nnoremap  <leader>fc <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap  <leader>fp <cmd>Telescope oldfiles<cr>
 nnoremap  <leader>fs <cmd>Telescope live_grep<cr>
 xnoremap  <leader>fs y<cmd>Telescope live_grep<cr><c-r>"
-nnoremap  <leader>ft <cmd>Telescope live_grep<cr>FIXME\|TODO
 nnoremap  <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap  <leader>fn <cmd>Telescope find_files cwd=~/Documents/Notes<cr>
 nnoremap  <leader>fd <cmd>lua require'telescope.builtin'.lsp_workspace_diagnostics(require('telescope.themes').get_dropdown({layout_config = {width=0.9}}), {line_width=100})<cr>
@@ -42,6 +41,7 @@ nnoremap  <leader>lw <cmd>Telescope lsp_dynamic_workspace_symbols jump_type=neve
 xnoremap  <leader>lw y<cmd>Telescope lsp_workspace_symbols query=<c-r>"<cr>
 nnoremap  <leader>lr <cmd>Telescope lsp_references<cr>
 nnoremap  K          <cmd>lua vim.lsp.buf.hover()<cr>
+nnoremap  <leader>ln <cmd>lua vim.lsp.buf.rename()<cr>
 
 " Git commands start with ,g
 nnoremap  <leader>gs  <cmd>vertical Git<cr>
@@ -50,5 +50,5 @@ nnoremap  <leader>gfa <cmd>Git fetch --all<cr>
 nnoremap  <leader>gc   <cmd>Git commit -v<cr>
 nnoremap  <leader>ga   <cmd>Git add %<cr>
 " Jump between merge conflicts with F8
-map <silent> <F8> /^\(<\{7\}\\|>\{7\}\\|=\{7\}\\|\|\{7\}\)\( \\|$\)<cr>
+map <F8> /^\(<\{7\}\\|>\{7\}\\|=\{7\}\\|\|\{7\}\)\( \\|$\)<cr>
 

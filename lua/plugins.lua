@@ -66,6 +66,7 @@ return require('packer').startup(function()
   use 'posva/vim-vue'
   use 'mxw/vim-jsx'
   use 'pangloss/vim-javascript'
+  use 'lepture/vim-jinja'
   -- Automatic window resizer
   use 'beauwilliams/focus.nvim'
   -- Colorschemes

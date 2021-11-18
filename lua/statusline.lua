@@ -6,7 +6,7 @@ require("lualine").setup{
     sections = {
         lualine_a = {{'mode', upper = true}},
         lualine_b = {{'branch', icon = ''}, 'diff'},
-        lualine_c = {{'filename', file_status = true, full_path = true}, { gps.get_location, condition = gps.is_available } },
+        lualine_c = {{'filename', file_status = true, full_path = true}, { gps.get_location, cond = gps.is_available } },
         lualine_x = {'encoding', 'fileformat', 'filetype'},
 		lualine_y = { require'lsp-status'.status },
         lualine_z = {'location'}

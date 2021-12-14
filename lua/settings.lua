@@ -10,6 +10,24 @@ g.indentLine_char='·'
 g.indentLine_enabled=1
 g.indentLine_fileTypeExclude= {"notes"}
 
+
+-- Markdown syntax options by https://jdhao.github.io/2019/01/15/markdown_edit_preview_nvim/
+-- disable header folding
+g.vim_markdown_folding_disabled = 1
+
+-- do not use conceal feature, the implementation is not so good
+g.vim_markdown_conceal = 0
+
+-- disable math tex conceal feature
+g.tex_conceal = ""
+g.vim_markdown_math = 1
+
+-- support front matter of various format
+g.vim_markdown_frontmatter = 1  -- for YAML format
+g.vim_markdown_toml_frontmatter = 1  -- for TOML format
+g.vim_markdown_json_frontmatter = 1  -- for JSON format
+
+
 g.notes_directories = {'~/Documents/Notes'}
 
 cmd('syntax enable')

@@ -29,7 +29,7 @@ nnoremap  <leader>fp <cmd>Telescope oldfiles<cr>
 nnoremap  <leader>fs <cmd>Telescope live_grep<cr>
 xnoremap  <leader>fs y<cmd>Telescope live_grep<cr><c-r>"
 nnoremap  <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap  <leader>fn <cmd>Telescope find_files cwd=~/Documents/Notes<cr>
+nnoremap  <leader>fn <cmd>Telescope find_files cwd=~/Documents/rendered_notes<cr>
 nnoremap  <leader>fd <cmd>lua require'telescope.builtin'.lsp_workspace_diagnostics(require('telescope.themes').get_dropdown({layout_config = {width=0.9}}), {line_width=100})<cr>
 nnoremap  <leader>fm <cmd>Telescope marks<cr>
 nnoremap  <leader>fl <cmd>Telescope jumplist<cr>

@@ -11,12 +11,19 @@ return require('packer').startup(function()
   -- Emmet foo in <p>foo</p> with <C-y>,
   use 'mattn/emmet-vim'
   use 'tpope/vim-surround'
+  use 'chentau/marks.nvim'
   use 'tpope/vim-repeat'
   -- Jump anywhere easy
   use 'justinmk/vim-sneak'
   -- Note taking with :Note something
   use 'xolox/vim-notes'
   use 'xolox/vim-misc'
+  -- Markdown enhancers
+  -- tabular plugin is used to format tables
+  use 'godlygeek/tabular'
+  -- JSON front matter highlight plugin
+  use 'elzr/vim-json'
+  use 'plasticboy/vim-markdown'
   -- Give hints on current indent
   use 'Yggdroot/indentLine'
   -- Ultra focus mode for current file with :Goyo

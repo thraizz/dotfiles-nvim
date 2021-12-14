@@ -1,8 +1,9 @@
 local actions = require('telescope.actions')
 require("telescope").setup {
     defaults = {
-        file_ignore_patterns = {"venv/"},
-        color_devicons = true,
+      theme = "ivy",
+      file_ignore_patterns = {"venv/"},
+      color_devicons = true,
     mappings = {
       i = {
         ["<esc>"] = actions.close,
@@ -16,3 +17,5 @@ require("telescope").setup {
     },
   }
 }
+
+require("telescope").load_extension "file_browser"

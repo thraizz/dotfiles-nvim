@@ -54,6 +54,7 @@ return require('packer').startup(function()
   use 'kyazdani42/nvim-web-devicons'
   -- Searcher+Picker
   use 'nvim-telescope/telescope.nvim'
+  use 'nvim-telescope/telescope-file-browser.nvim'
   -- Debugger
   use 'mfussenegger/nvim-dap'
   -- Python Debugger

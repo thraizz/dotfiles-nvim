@@ -19,7 +19,8 @@ noremap <F9> :!%:p<ENTER>
 " Telescope commands start with ,f
 nnoremap  <C-d>      <cmd>Telescope buffers sort_lastused=true sort_mru=true<cr>
 nnoremap  <C-f>      <cmd>Telescope oldfiles cwd_only=true sort_lastused=true<cr>
-map       <C-n>      <cmd>Telescope file_browser sort_lastused=true cwd=%:p:h<cr>
+map       <C-n>      <cmd>lua require 'telescope'.extensions.file_browser.file_browser()<cr>
+map       <C-M-n>    <cmd>lua require 'telescope'.extensions.file_browser.file_browser({path='%:p:h'})<cr>
 map       <C-p>      <cmd>Telescope oldfiles include_current_session=true<cr>
 nnoremap  <leader>ff <cmd>Telescope find_files sort_lastused=true<cr>
 xnoremap  <leader>ff y<cmd>Telescope find_files<cr><c-r>"

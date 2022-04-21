@@ -2,7 +2,6 @@ local gps = require("nvim-gps")
 gps.setup()
 -- lualine setup
 require("lualine").setup{
-    options = { theme  = 'material-nvim' },
     sections = {
         lualine_a = {{'mode', upper = true}},
         lualine_b = {{'branch', icon = ''}, 'diff'},

@@ -32,7 +32,8 @@ g.notes_directories = {'~/Documents/Notes'}
 
 cmd('syntax enable')
 cmd('syntax on')
-
+cmd('set title')
+cmd('set titleold=')
 cmd('set background=dark')
 cmd('set shell=/bin/bash')
 cmd('set tabstop=4')

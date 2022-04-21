@@ -16,35 +16,36 @@ nnoremap <S-Tab> <<
 " Run file with F9
 noremap <F9> :!%:p<ENTER>
 
-" Telescope commands start with ,f
-nnoremap  <C-d>      <cmd>Telescope buffers sort_lastused=true sort_mru=true<cr>
-nnoremap  <C-f>      <cmd>Telescope oldfiles cwd_only=true sort_lastused=true<cr>
-map       <C-n>      <cmd>lua require 'telescope'.extensions.file_browser.file_browser()<cr>
-map       <C-M-n>    <cmd>lua require 'telescope'.extensions.file_browser.file_browser({path='%:p:h'})<cr>
-map       <C-p>      <cmd>Telescope oldfiles include_current_session=true<cr>
+" Telescope
+"" Show keymaps
+nnoremap  <leader><leader> <cmd>Telescope keymaps<cr>
+"" Show files
+nnoremap  <leader>fd <cmd>Telescope buffers sort_lastused=true sort_mru=true<cr>
+nnoremap  <leader>fo <cmd>Telescope oldfiles cwd_only=true include_current_session=true<cr>
+nnoremap  <leader>fO <cmd>Telescope oldfiles cwd_only=true include_current_session=true<cr>
 nnoremap  <leader>ff <cmd>Telescope find_files sort_lastused=true<cr>
 xnoremap  <leader>ff y<cmd>Telescope find_files<cr><c-r>"
 nnoremap  <leader>fc <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap  <leader>fp <cmd>Telescope oldfiles<cr>
 nnoremap  <leader>fs <cmd>Telescope live_grep<cr>
-xnoremap  <leader>fs y<cmd>Telescope live_grep<cr><c-r>"
+xnoremap  <leader>fs y<cmd>lua require'telescope.builtin'.live_grep(require('telescope.themes').get_dropdown({}))<cr><c-r>"
 nnoremap  <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap  <leader>fn <cmd>Telescope find_files cwd=~/Documents/rendered_notes<cr>
-nnoremap  <leader>fd <cmd>lua require'telescope.builtin'.lsp_workspace_diagnostics(require('telescope.themes').get_dropdown({layout_config = {width=0.9}}), {line_width=100})<cr>
+nnoremap  <leader>fno <cmd>Telescope find_files cwd=~/Documents/rendered_notes<cr>
+nnoremap  <leader>fn <cmd>Telescope file_browser<cr>
+map       <leader>fN <cmd>Telescope file_browser path='%:p:h'<cr>
 nnoremap  <leader>fm <cmd>Telescope marks<cr>
 nnoremap  <leader>fl <cmd>Telescope jumplist<cr>
-
-" LSP Commands start with ,l
+"" Show LSP stuff
+nnoremap  <leader>lfd <cmd>Telescope lsp_workspace_diagnostics<cr>
 nnoremap  <leader>lD <cmd>Telescope lsp_implementations jump_type=never<cr>
 nnoremap  <leader>ld <cmd>Telescope lsp_definitions jump_type=never<cr>
 nnoremap  <leader>ls <cmd>Telescope lsp_document_symbols jump_type=never<cr>
 nnoremap  <leader>lw <cmd>Telescope lsp_dynamic_workspace_symbols jump_type=never<cr>
-xnoremap  <leader>lw y<cmd>Telescope lsp_workspace_symbols query=<c-r>"<cr>
+xnoremap  <leader>lw y<cmd>Telescope lsp_workspace_symbols cursor query=<c-r>"<cr>
 nnoremap  <leader>lr <cmd>Telescope lsp_references<cr>
 nnoremap  K          <cmd>lua vim.lsp.buf.hover()<cr>
 nnoremap  <leader>ln <cmd>lua vim.lsp.buf.rename()<cr>
-
-" Git commands start with ,g
+"" Show Git stuff
 nnoremap  <leader>gs  <cmd>vertical Git<cr>
 nnoremap  <leader>gd  <cmd>vertical Gdiffsplit<cr>
 nnoremap  <leader>gfa <cmd>Git fetch --all<cr>

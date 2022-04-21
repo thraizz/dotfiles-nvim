@@ -7,11 +7,10 @@ g.indent_blankline_show_first_indent_level = false
 g.indentLine_conceallevel=1
 g.indentLine_char='·'
 g.indentLine_enabled=1
-g.material_style = "darker"
+g.material_style = "lighter"
 
 require('material').setup({
 
-	contrast = true, -- Enable contrast for sidebars, floating windows and popup menus like Nvim-Tree
 	borders = true, -- Enable borders between verticaly split windows
 
 	popup_menu = "dark", -- Popup menu style ( can be: 'dark', 'light', 'colorful' or 'stealth' )
@@ -32,7 +31,7 @@ require('material').setup({
 	},
 
 	text_contrast = {
-		lighter = false, -- Enable higher contrast text for lighter style
+		lighter = true, -- Enable higher contrast text for lighter style
 		darker = true -- Enable higher contrast text for darker style
 	},
 
@@ -44,3 +43,4 @@ require('material').setup({
 
 	custom_highlights = {} -- Overwrite highlights with your own
 })
+vim.cmd 'colorscheme material'

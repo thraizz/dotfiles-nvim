@@ -9,25 +9,23 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] =
         update_in_insert = false, -- delay update
         severity_sort = true
     })
-local servers = { "vuels", "phpactor" }
+local servers = { "cssls", "vuels", "phpactor", "pyright" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     capabilities = lsp_status.capabilities
     }
 end
 
-require("null-ls").setup({
-    sources = sources,
-    on_attach = on_attach,
-})
+-- local null_ls = require("null-ls")
+-- null_ls.setup({
+--   debug = true,
+--   sources = {
+--     null_ls.builtins.diagnostics.eslint_d, -- eslint or eslint_d
+--     null_ls.builtins.code_actions.eslint_d, -- eslint or eslint_d
+--     null_ls.builtins.formatting.eslint -- prettier, eslint, eslint_d, or prettierd
+--   },
+-- })
 
-nvim_lsp.pyright.setup {
-  capabilities = lsp_status.capabilities,
-  on_attach = function(client)
-    require('dap-python').test_runner = 'pytest'
-    vim.api.nvim_set_keymap('n', ',ft', ":lua require('dap-python').test_method()<cr>", {})
-  end
-}
 
 nvim_lsp.tsserver.setup {
   capabilities = lsp_status.capabilities,

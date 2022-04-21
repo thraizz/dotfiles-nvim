@@ -37,9 +37,11 @@ return require('packer').startup(function()
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
+  use 'nvim-treesitter/nvim-treesitter-angular'
   use 'SmiteshP/nvim-gps'
   -- LSP Configuration
   use 'neovim/nvim-lspconfig'
+  use 'williamboman/nvim-lsp-installer'
   use 'nvim-lua/lsp_extensions.nvim'
   use 'nvim-lua/popup.nvim'
   use 'nvim-lua/plenary.nvim'
@@ -74,7 +76,7 @@ return require('packer').startup(function()
   use 'posva/vim-vue'
   use 'mxw/vim-jsx'
   use 'pangloss/vim-javascript'
-  use 'lepture/vim-jinja'
+  -- use 'lepture/vim-jinja'
   -- Automatic window resizer
   use 'beauwilliams/focus.nvim'
   -- Colorschemes
@@ -82,4 +84,5 @@ return require('packer').startup(function()
   use 'folke/tokyonight.nvim'
   use 'gruvbox-community/gruvbox'
   use 'marko-cerovac/material.nvim'
+  use 'EdenEast/nightfox.nvim'
 end)

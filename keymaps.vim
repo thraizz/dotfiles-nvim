@@ -30,9 +30,8 @@ nnoremap  <leader>fp <cmd>Telescope oldfiles<cr>
 nnoremap  <leader>fs <cmd>Telescope live_grep<cr>
 xnoremap  <leader>fs y<cmd>lua require'telescope.builtin'.live_grep(require('telescope.themes').get_dropdown({}))<cr><c-r>"
 nnoremap  <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap  <leader>fno <cmd>Telescope find_files cwd=~/Documents/rendered_notes<cr>
 nnoremap  <leader>fn <cmd>Telescope file_browser<cr>
-map       <leader>fN <cmd>Telescope file_browser path='%:p:h'<cr>
+map       <leader>fN <cmd>Telescope file_browser path=%:p:h<cr>
 nnoremap  <leader>fm <cmd>Telescope marks<cr>
 nnoremap  <leader>fl <cmd>Telescope jumplist<cr>
 "" Show LSP stuff
@@ -54,3 +53,4 @@ nnoremap  <leader>ga   <cmd>Git add %<cr>
 " Jump between merge conflicts with F8
 map <F8> /^\(<\{7\}\\|>\{7\}\\|=\{7\}\\|\|\{7\}\)\( \\|$\)<cr>
 
+inoremap <leader><Tab> <Cmd>lua require('cmp').complete()<CR>

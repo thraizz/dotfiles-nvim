@@ -2,7 +2,7 @@ local actions = require('telescope.actions')
 local themes = require('telescope.themes')
 require("telescope").setup {
   defaults = {
-    theme = "dropdown",
+    theme = {"dropdown"},
     path_display = {"smart"},
     layout_config = { 
       bottom_pane = { width = 0.5 },
@@ -28,7 +28,7 @@ require("telescope").setup {
     find_files = {
       theme = "dropdown",
     },
-    old_files = {
+    oldfiles = {
       theme = "dropdown",
     },
     live_grep = {

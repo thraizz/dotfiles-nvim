@@ -5,6 +5,12 @@ if fn.empty(fn.glob(install_path)) > 0 then
   vim.cmd 'packadd packer.nvim'
 end
 vim.cmd [[packadd packer.nvim]]
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
 
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
@@ -13,6 +19,7 @@ return require('packer').startup(function()
   use 'tpope/vim-surround'
   use 'chentau/marks.nvim'
   use 'tpope/vim-repeat'
+  use 'tpope/vim-commentary'
   -- Jump anywhere easy
   use 'justinmk/vim-sneak'
   -- Note taking with :Note something
@@ -62,8 +69,12 @@ return require('packer').startup(function()
   -- Icons for statusline and telescope
   use 'kyazdani42/nvim-web-devicons'
   -- Searcher+Picker
-  use 'nvim-telescope/telescope.nvim'
-  use 'nvim-telescope/telescope-file-browser.nvim'
+  use {
+    'nvim-telescope/telescope.nvim', 
+    requires = {
+      {'nvim-telescope/telescope-file-browser.nvim', 'nvim-telescope/telescope-live-grep-raw.nvim' }
+    }
+  }
   -- Debugger
   use 'mfussenegger/nvim-dap'
   -- Python Debugger

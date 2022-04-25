@@ -105,9 +105,5 @@ return require('packer').startup(function()
   -- Automatic window resizer
   use 'beauwilliams/focus.nvim'
   -- Colorschemes
-  use 'RRethy/nvim-base16'
-  use 'folke/tokyonight.nvim'
-  use 'gruvbox-community/gruvbox'
   use 'marko-cerovac/material.nvim'
-  use 'EdenEast/nightfox.nvim'
 end)

@@ -10,6 +10,20 @@ g.indentLine_char = '·'
 g.indentLine_enabled = 1
 g.indentLine_fileTypeExclude = { "notes" }
 
+vim.api.nvim_create_autocmd("CursorHold", {
+  buffer = bufnr,
+  callback = function()
+    local opts = {
+      focusable = false,
+      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+      border = 'rounded',
+      source = 'always',
+      prefix = ' ',
+      scope = 'cursor',
+    }
+    vim.diagnostic.open_float(nil, opts)
+  end
+})
 
 
 -- Markdown syntax options by https://jdhao.github.io/2019/01/15/markdown_edit_preview_nvim/

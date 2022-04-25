@@ -1,16 +1,15 @@
 local actions = require('telescope.actions')
-local themes = require('telescope.themes')
 require("telescope").setup {
   defaults = {
-    theme = {"dropdown"},
-    path_display = {"smart"},
-    layout_config = { 
-      bottom_pane = { width = 0.5 },
-      vertical = { width = 0.5 },
+    theme = { "dropdown" },
+    path_display = { "smart" },
+    layout_config = {
+      bottom_pane = { width = 0.9 },
+      vertical = { width = 0.9 },
       center = { width = 0.9 },
-      horizontal = { width = 0.5 }
+      horizontal = { width = 0.9 }
     },
-    file_ignore_patterns = {"venv/"},
+    file_ignore_patterns = { "venv/" },
     color_devicons = true,
     mappings = {
       i = {
@@ -23,21 +22,21 @@ require("telescope").setup {
         ["<C-p>"] = actions.cycle_history_prev,
       },
     },
-  }, 
+  },
   pickers = {
-    find_files = {
+    find_files            = {
       theme = "dropdown",
     },
-    oldfiles = {
+    oldfiles              = {
       theme = "dropdown",
     },
-    live_grep = {
+    live_grep             = {
       theme = "dropdown",
     },
     lsp_workspace_symbols = {
       theme = "cursor",
     },
-    lsp_references  = {
+    lsp_references        = {
       theme = "cursor",
     },
   },

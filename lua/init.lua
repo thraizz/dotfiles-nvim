@@ -7,10 +7,6 @@ require "completion"
 require "treesitter"
 require "settings"
 
-require("focus").setup({signcolumn = false, excluded_filetypes = {"telescope"}})
-require('dap-python').setup('/usr/bin/python')
 
 vim.api.nvim_set_keymap('n', ',', '', {})
 vim.g.mapleader = ','
-
-require("marks").setup {}

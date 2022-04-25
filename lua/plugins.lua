@@ -1,7 +1,7 @@
 local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+  fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
   vim.cmd 'packadd packer.nvim'
 end
 vim.cmd [[packadd packer.nvim]]
@@ -17,7 +17,12 @@ return require('packer').startup(function()
   -- Emmet foo in <p>foo</p> with <C-y>,
   use 'mattn/emmet-vim'
   use 'tpope/vim-surround'
-  use 'chentau/marks.nvim'
+  use {
+    'chentau/marks.nvim',
+    config = function()
+      require("marks").setup {}
+    end
+  }
   use 'tpope/vim-repeat'
   -- Comments enhanced
   use 'tpope/vim-commentary'
@@ -84,16 +89,21 @@ return require('packer').startup(function()
   use 'kyazdani42/nvim-web-devicons'
   -- Searcher+Picker
   use {
-    'nvim-telescope/telescope.nvim', 
+    'nvim-telescope/telescope.nvim',
     requires = {
-      {'nvim-telescope/telescope-file-browser.nvim', 'nvim-telescope/telescope-live-grep-raw.nvim' }
+      { 'nvim-telescope/telescope-file-browser.nvim', 'nvim-telescope/telescope-live-grep-raw.nvim' }
     }
   }
   -- Debugger
   use 'mfussenegger/nvim-dap'
   -- Python Debugger
   -- requires debugpy!
-  use 'mfussenegger/nvim-dap-python'
+  use {
+    'mfussenegger/nvim-dap-python',
+    config = function()
+      require('dap-python').setup('/usr/bin/python')
+    end
+  }
   -- JS/TS specific LSP configuration
   use 'jose-elias-alvarez/nvim-lsp-ts-utils'
   use 'jose-elias-alvarez/null-ls.nvim'
@@ -103,7 +113,12 @@ return require('packer').startup(function()
   use 'pangloss/vim-javascript'
   -- use 'lepture/vim-jinja'
   -- Automatic window resizer
-  use 'beauwilliams/focus.nvim'
+  use {
+    'beauwilliams/focus.nvim',
+    config = function()
+      require('focus').setup({ signcolumn = false, excluded_filetypes = { 'telescope' } })
+    end
+  }
   -- Colorschemes
   use 'marko-cerovac/material.nvim'
 end)

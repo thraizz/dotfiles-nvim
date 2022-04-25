@@ -20,7 +20,7 @@ noremap <F9> :!%:p<ENTER>
 "" Show keymaps
 nnoremap  <leader><leader> <cmd>Telescope keymaps<cr>
 "" Show files
-nnoremap  <leader>fd <cmd>Telescope buffers sort_lastused=true sort_mru=true<cr>
+nnoremap  <leader>fd <cmd>Telescope buffers sort_lastused=true sort_mru=true theme=dropdown<cr>
 nnoremap  <leader>fo <cmd>Telescope oldfiles cwd_only=true include_current_session=true<cr>
 nnoremap  <leader>fO <cmd>Telescope oldfiles cwd_only=true include_current_session=true<cr>
 nnoremap  <leader>ff <cmd>Telescope find_files sort_lastused=true<cr>
@@ -35,10 +35,12 @@ map       <leader>fN <cmd>Telescope file_browser path=%:p:h<cr>
 nnoremap  <leader>fm <cmd>Telescope marks<cr>
 nnoremap  <leader>fl <cmd>Telescope jumplist<cr>
 "" Show LSP stuff
+inoremap  <leader>la <cmd>lua vim.lsp.buf.code_action()<cr>
+nnoremap  <A-Cr> <cmd>lua vim.lsp.buf.code_action()<cr>
 nnoremap  <leader>lfd <cmd>Telescope lsp_workspace_diagnostics<cr>
 nnoremap  <leader>lD <cmd>Telescope lsp_implementations jump_type=never<cr>
-nnoremap  <leader>ld <cmd>Telescope lsp_definitions jump_type=never<cr>
-nnoremap  <leader>ls <cmd>Telescope lsp_document_symbols jump_type=never<cr>
+nnoremap  <leader>ld <cmd>Telescope lsp_definitions theme=cursor<cr>
+nnoremap  <leader>ls <cmd>Telescope lsp_document_symbols theme=cursor jump_type=never<cr>
 nnoremap  <leader>lw <cmd>Telescope lsp_dynamic_workspace_symbols jump_type=never<cr>
 xnoremap  <leader>lw y<cmd>Telescope lsp_workspace_symbols cursor query=<c-r>"<cr>
 nnoremap  <leader>lr <cmd>Telescope lsp_references<cr>

@@ -7,7 +7,7 @@ g.indent_blankline_show_first_indent_level = false
 g.indentLine_conceallevel=1
 g.indentLine_char='·'
 g.indentLine_enabled=1
-g.material_style = "darker"
+g.material_style = "palenight"
 
 require('material').setup({
 

@@ -57,6 +57,7 @@ cmp.setup {
     end, { "i", "s" }),
   },
   sources = {
+    { name = "git" },
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
@@ -64,3 +65,5 @@ cmp.setup {
     format = lspkind.cmp_format(),
   },
 }
+
+require("cmp_git").setup()

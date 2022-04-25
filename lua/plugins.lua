@@ -56,13 +56,24 @@ return require('packer').startup(function()
   use 'onsails/lspkind-nvim'
   -- Completion via nvim-cmp (snippets included)
   use 'hrsh7th/nvim-cmp'
+  use 'petertriho/cmp-git'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'rafamadriz/friendly-snippets'
   use 'saadparwaiz1/cmp_luasnip'
   use 'L3MON4D3/LuaSnip'
   -- Pretty statusline (bottom) and buffers as tabs (top)
   use 'hoob3rt/lualine.nvim'
-  use 'akinsho/bufferline.nvim'
+  use {
+    'akinsho/bufferline.nvim',
+    config = function()
+      require("bufferline").setup {
+        options = {
+          diagnostics = "nvim_lsp",
+          mode = "tabs",
+        }
+      }
+    end
+  }
   -- Pretty git experience
   use 'thraizz/git-blame.nvim'
   use 'tpope/vim-fugitive'

@@ -19,7 +19,10 @@ return require('packer').startup(function()
   use 'tpope/vim-surround'
   use 'chentau/marks.nvim'
   use 'tpope/vim-repeat'
+  -- Comments enhanced
   use 'tpope/vim-commentary'
+  -- Cursor-dependent comment string for tsx files
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
   -- Jump anywhere easy
   use 'justinmk/vim-sneak'
   -- Note taking with :Note something

@@ -13,6 +13,17 @@ vim.cmd([[
 ]])
 
 return require('packer').startup(function()
+  use {
+    "uga-rosa/translate.nvim",
+    config = function () 
+        require("translate").setup({
+        default = {
+            command = "deepl_free",
+            output = "replace",
+        },
+    })
+    end
+  }
   use 'wbthomason/packer.nvim'
   -- Emmet foo in <p>foo</p> with <C-y>,
   use 'mattn/emmet-vim'

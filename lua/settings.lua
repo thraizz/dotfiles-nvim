@@ -8,7 +8,8 @@ g.indent_blankline_show_first_indent_level = false
 g.indentLine_conceallevel = 1
 g.indentLine_char = '·'
 g.indentLine_enabled = 1
-g.indentLine_fileTypeExclude = { "notes" }
+g.indentLine_fileTypeExclude = { "notes", "json" }
+g.vim_json_syntax_conceal = 0
 
 vim.api.nvim_create_autocmd("CursorHold", {
   buffer = bufnr,

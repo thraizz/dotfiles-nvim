@@ -6,6 +6,7 @@ require "lsp"
 require "completion"
 require "treesitter"
 require "settings"
+require "apiKeys"
 
 
 vim.api.nvim_set_keymap('n', ',', '', {})

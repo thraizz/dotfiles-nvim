@@ -48,10 +48,15 @@ nnoremap  K          <cmd>lua vim.lsp.buf.hover()<cr>
 nnoremap  <leader>ln <cmd>lua vim.lsp.buf.rename()<cr>
 "" Show Git stuff
 nnoremap  <leader>gs  <cmd>vertical Git<cr>
+
 nnoremap  <leader>gd  <cmd>vertical Gdiffsplit<cr>
 nnoremap  <leader>gfa <cmd>Git fetch --all<cr>
-nnoremap  <leader>gc   <cmd>Git commit -v<cr>
-nnoremap  <leader>ga   <cmd>Git add %<cr>
+nnoremap  <leader>gc  <cmd>Git commit -v<cr>
+nnoremap  <leader>ga  <cmd>Git add %<cr>
+nnoremap  <leader>gp  <cmd>Git push<cr>
+"" Commentary
+nnoremap  <C-_>       <cmd>Commentary<cr>
+vnoremap  <C-_>       <Plug>Commentary<cr>
 " Jump between merge conflicts with F8
 map <F8> /^\(<\{7\}\\|>\{7\}\\|=\{7\}\\|\|\{7\}\)\( \\|$\)<cr>
 

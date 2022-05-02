@@ -21,8 +21,6 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(require('lsp_
 local tsserver_opts = {
   capabilities = lsp_status.capabilities,
   on_attach = function(client)
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
     ts_utils.setup {
       -- import all
       import_all_timeout = 5000, -- ms
@@ -53,7 +51,7 @@ lsp_installer.on_server_ready(function(server)
   local opts = {
     capabilities = lsp_status.capabilities,
     on_attach = function(client)
-      if client.resolved_capabilities.document_formatting then
+      if client.server_capabilities.document_formatting then
         vim.cmd([[
           augroup LspFormatting
               autocmd! * <buffer>
@@ -103,7 +101,7 @@ end)
 
 null_ls.setup({
   on_attach = function(client)
-    if client.resolved_capabilities.document_formatting then
+    if client.server_capabilities.document_formatting then
       vim.cmd([[
           augroup LspFormatting
               autocmd! * <buffer>

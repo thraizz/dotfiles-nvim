@@ -8,6 +8,9 @@ local has_words_before = function()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
+local luasnip = require 'luasnip'
+local cmp = require 'cmp'
+local lspkind = require('lspkind')
 local jump_forwards = function(fallback)
   if cmp.visible() then
     cmp.select_next_item()
@@ -30,9 +33,6 @@ local jump_backwards = function(fallback)
   end
 end
 
-local luasnip = require 'luasnip'
-local cmp = require 'cmp'
-local lspkind = require('lspkind')
 cmp.setup {
   snippet = {
     expand = function(args)

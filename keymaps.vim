@@ -56,7 +56,7 @@ nnoremap  <leader>gc  <cmd>Git commit -v<cr>
 nnoremap  <leader>ga  <cmd>Git add %<cr>
 nnoremap  <leader>gp  <cmd>Git push<cr>
 nnoremap  <leader>gb  <cmd>Telescope git_branches<cr>
-nnoremap  <leader>gl  <cmd>Git log<cr>
+nnoremap  <leader>gl  <cmd>vertical Git log<cr>
 "" Commentary
 nnoremap  <C-_>       <cmd>Commentary<cr>
 vnoremap  <C-_>       <Plug>Commentary<cr>

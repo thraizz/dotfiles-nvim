@@ -14,12 +14,12 @@ vim.cmd([[
 
 return require('packer').startup(function()
   use {
-    "uga-rosa/translate.nvim",
+    'uga-rosa/translate.nvim',
     config = function () 
-        require("translate").setup({
+        require('translate').setup({
         default = {
-            command = "deepl_free",
-            output = "replace",
+            command = 'deepl_free',
+            output = 'replace',
         },
     })
     end
@@ -31,7 +31,7 @@ return require('packer').startup(function()
   use {
     'chentau/marks.nvim',
     config = function()
-      require("marks").setup {}
+      require('marks').setup {}
     end
   }
   use 'tpope/vim-repeat'
@@ -85,10 +85,10 @@ return require('packer').startup(function()
   use {
     'akinsho/bufferline.nvim',
     config = function()
-      require("bufferline").setup {
+      require('bufferline').setup {
         options = {
-          diagnostics = "nvim_lsp",
-          mode = "tabs",
+          diagnostics = 'nvim_lsp',
+          mode = 'tabs',
         }
       }
     end
@@ -102,7 +102,7 @@ return require('packer').startup(function()
   use {
     'nvim-telescope/telescope.nvim',
     requires = {
-      { 'nvim-telescope/telescope-file-browser.nvim', 'nvim-telescope/telescope-live-grep-raw.nvim' }
+      { 'nvim-telescope/telescope-file-browser.nvim', 'nvim-telescope/telescope-live-grep-raw.nvim', 'natecraddock/telescope-zf-native.nvim' }
     }
   }
   -- Debugger

@@ -26,7 +26,8 @@ nnoremap  <leader>fO <cmd>Telescope oldfiles cwd_only=true include_current_sessi
 nnoremap  <leader>ff <cmd>Telescope find_files sort_lastused=true<cr>
 xnoremap  <leader>ff y<cmd>Telescope find_files<cr><c-r>"
 nnoremap  <leader>fc <cmd>Telescope current_buffer_fuzzy_find<cr>
-nnoremap  <leader>fp <cmd>Telescope oldfiles<cr>
+nnoremap  <leader>fp <cmd>Telescope oldfiles cwd_only=true<cr>
+nnoremap  <leader>fP <cmd>Telescope oldfiles<cr>
 nnoremap  <leader>fs <cmd>Telescope live_grep<cr>
 xnoremap  <leader>fs y<cmd>lua require'telescope.builtin'.live_grep(require('telescope.themes').get_dropdown({}))<cr><c-r>"
 nnoremap  <leader>fh <cmd>Telescope help_tags<cr>

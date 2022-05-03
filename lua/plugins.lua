@@ -79,6 +79,7 @@ return require('packer').startup(function()
     requires = {
       'petertriho/cmp-git',
       'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
       'thraizz/friendly-snippets',
       'saadparwaiz1/cmp_luasnip',
       'L3MON4D3/LuaSnip'

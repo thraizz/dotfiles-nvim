@@ -15,13 +15,13 @@ vim.cmd([[
 return require('packer').startup(function()
   use {
     'uga-rosa/translate.nvim',
-    config = function () 
-        require('translate').setup({
+    config = function()
+      require('translate').setup({
         default = {
-            command = 'deepl_free',
-            output = 'replace',
+          command = 'deepl_free',
+          output = 'replace',
         },
-    })
+      })
     end
   }
   use 'wbthomason/packer.nvim'
@@ -74,12 +74,16 @@ return require('packer').startup(function()
   use 'nvim-lua/lsp-status.nvim'
   use 'onsails/lspkind-nvim'
   -- Completion via nvim-cmp (snippets included)
-  use 'hrsh7th/nvim-cmp'
-  use 'petertriho/cmp-git'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'rafamadriz/friendly-snippets'
-  use 'saadparwaiz1/cmp_luasnip'
-  use 'L3MON4D3/LuaSnip'
+  use {
+    'hrsh7th/nvim-cmp',
+    requires = {
+      'petertriho/cmp-git',
+      'hrsh7th/cmp-nvim-lsp',
+      'thraizz/friendly-snippets',
+      'saadparwaiz1/cmp_luasnip',
+      'L3MON4D3/LuaSnip'
+    }
+  }
   -- Pretty statusline (bottom) and buffers as tabs (top)
   use 'hoob3rt/lualine.nvim'
   use {
@@ -102,7 +106,11 @@ return require('packer').startup(function()
   use {
     'nvim-telescope/telescope.nvim',
     requires = {
-      { 'nvim-telescope/telescope-file-browser.nvim', 'nvim-telescope/telescope-live-grep-raw.nvim', 'natecraddock/telescope-zf-native.nvim' }
+      {
+        'nvim-telescope/telescope-file-browser.nvim',
+        'nvim-telescope/telescope-live-grep-raw.nvim',
+        'natecraddock/telescope-zf-native.nvim'
+      }
     }
   }
   -- Debugger

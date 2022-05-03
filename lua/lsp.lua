@@ -1,8 +1,9 @@
-local nvim_lsp = require('lspconfig')
+local lspconfig = require('lspconfig')
 local null_ls = require("null-ls")
 local ts_utils = require("nvim-lsp-ts-utils")
 local lsp_status = require('lsp-status')
 local lsp_installer = require("nvim-lsp-installer")
+local cmp_nvim_lsp = require('cmp_nvim_lsp')
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
@@ -16,10 +17,48 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(require('lsp_
   severity_sort = true
 })
 
+local lsp_formatting = function(bufnr)
+  vim.lsp.buf.format({
+    filter = function(clients)
+      -- filter out clients that you don't want to use
+      return vim.tbl_filter(function(client)
+        return client.name ~= "tsserver"
+      end, clients)
+    end,
+    bufnr = bufnr,
+  })
+end
 
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
-local tsserver_opts = {
-  capabilities = lsp_status.capabilities,
+local on_attach = function(client, bufnr)
+  if client.supports_method("textDocument/formatting") then
+    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        lsp_formatting(bufnr)
+      end,
+    })
+  end
+end
+
+local capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+lsp_installer.setup {}
+-- for _, lsp in pairs(lsp_installer.get_installed_servers) do
+--   lspconfig[lsp].setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     flags = {
+--       -- This will be the default in neovim 0.7+
+--       debounce_text_changes = 150,
+--     }
+--   }
+-- end
+lspconfig.tsserver.setup {
+  capabilities = capabilities,
   on_attach = function(client)
     ts_utils.setup {
       -- import all
@@ -44,90 +83,35 @@ local tsserver_opts = {
     ts_utils.setup_client(client)
   end,
 }
-
-local lsp_formatting = function(bufnr)
-    vim.lsp.buf.format({
-        filter = function(clients)
-            -- filter out clients that you don't want to use
-            return vim.tbl_filter(function(client)
-                return client.name ~= "tsserver"
-            end, clients)
-        end,
-        bufnr = bufnr,
-    })
-end
-
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
--- Register a handler that will be called for each installed server when it's ready (i.e. when installation is finished
--- or if the server is already installed).
-lsp_installer.on_server_ready(function(server)
-  local opts = {
-    capabilities = lsp_status.capabilities,
-    on_attach = function(client)
-      if client.supports_method("textDocument/formatting") then
-        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          group = augroup,
-          buffer = bufnr,
-          callback = function()
-            lsp_formatting(bufnr)
-          end,
-        })
-      end
-    end,
+lspconfig.sumneko_lua.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+        -- Setup your lua path
+        path = runtime_path,
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = { 'vim' },
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
   }
-
-  if server.name == "tsserver" then
-    opts = tsserver_opts
-  end
-
-  if server.name == "sumneko_lua" then
-    opts = {
-      settings = {
-        Lua = {
-          runtime = {
-            -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-            version = 'LuaJIT',
-            -- Setup your lua path
-            path = runtime_path,
-          },
-          diagnostics = {
-            -- Get the language server to recognize the `vim` global
-            globals = { 'vim' },
-          },
-          workspace = {
-            -- Make the server aware of Neovim runtime files
-            library = vim.api.nvim_get_runtime_file("", true),
-          },
-          -- Do not send telemetry data containing a randomized but unique identifier
-          telemetry = {
-            enable = false,
-          },
-        },
-      }
-    }
-  end
-
-  -- This setup() function will take the provided server configuration and decorate it with the necessary properties
-  -- before passing it onwards to lspconfig.
-  -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-  server:setup(opts)
-end)
+})
 
 null_ls.setup({
-  on_attach = function(client)
-    if client.supports_method("textDocument/formatting") then
-      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup,
-        buffer = bufnr,
-        callback = function()
-          lsp_formatting(bufnr)
-        end,
-      })
-    end
-  end,
+  on_attach = on_attach,
   debug = true,
   sources = {
     null_ls.builtins.diagnostics.eslint_d,

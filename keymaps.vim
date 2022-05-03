@@ -20,7 +20,7 @@ noremap <F9> :!%:p<ENTER>
 "" Show keymaps
 nnoremap  <leader><leader> <cmd>Telescope keymaps<cr>
 "" Show files
-nnoremap  <leader>fd <cmd>Telescope buffers sort_lastused=true sort_mru=true theme=dropdown<cr>
+nnoremap  <leader>fd <cmd>Telescope buffers sort_lastused=true theme=dropdown<cr>
 nnoremap  <leader>fo <cmd>Telescope oldfiles cwd_only=true include_current_session=true<cr>
 nnoremap  <leader>fO <cmd>Telescope oldfiles cwd_only=true include_current_session=true<cr>
 nnoremap  <leader>ff <cmd>Telescope find_files sort_lastused=true<cr>

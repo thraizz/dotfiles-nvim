@@ -8,6 +8,7 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
+lsp_installer.setup {}
 lsp_status.register_progress()
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(require('lsp_extensions.workspace.diagnostic').handler, {
@@ -46,20 +47,25 @@ end
 
 local capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-lsp_installer.setup {}
--- for _, lsp in pairs(lsp_installer.get_installed_servers) do
---   lspconfig[lsp].setup {
---     on_attach = on_attach,
---     capabilities = capabilities,
---     flags = {
---       -- This will be the default in neovim 0.7+
---       debounce_text_changes = 150,
---     }
---   }
--- end
+for _, server in ipairs(lsp_installer.get_installed_servers()) do
+  lspconfig[server.name].setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+    autostart = false
+  }
+end
+
+lspconfig.pyright.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  autostart = false
+}
+
 lspconfig.tsserver.setup {
   capabilities = capabilities,
   on_attach = function(client)
+    client.server_capabilities.document_formatting = false
+    client.server_capabilities.document_range_formatting = false
     ts_utils.setup {
       -- import all
       import_all_timeout = 5000, -- ms

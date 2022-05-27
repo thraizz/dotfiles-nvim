@@ -33,6 +33,26 @@ local jump_backwards = function(fallback)
   end
 end
 
+local next_snippet_or_confirm = function(fallback)
+  if cmp.get_selected_entry() then
+    cmp.confirm({ select = false })
+  elseif luasnip.jumpable() then
+    luasnip.jumpable(1)
+    print("Jumpable, not expanding")
+    luasnip.jump(1)
+  elseif luasnip.in_snippet() then
+    print("In snippet, not expanding")
+    fallback()
+  elseif luasnip.expandable() then
+    print("Not in snippet, expanding")
+    luasnip.expand()
+  elseif cmp.visible() then
+    cmp.confirm({ select = false })
+  else
+    fallback()
+  end
+end
+
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -46,21 +66,38 @@ cmp.setup {
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.confirm({ select = true }),
     ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm({ select = false }),
+    ['<CR>'] = cmp.mapping(next_snippet_or_confirm, { "i", "s" }),
     ["<Down>"] = cmp.mapping(jump_forwards, { "i", "s" }),
-    ["<Tab>"] = cmp.mapping(jump_forwards, { "i", "s" }),
+    ["<Tab>"] = cmp.mapping(next_snippet_or_confirm, { "i", "s" }),
     ["<S-Tab>"] = cmp.mapping(jump_backwards, { "i", "s" }),
     ["<Up>"] = cmp.mapping(jump_backwards, { "i", "s" }),
   },
   sources = {
-    { name = "git" },
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'luasnip' },
+    { name = 'cmp-nvim-lsp' },
+    { name = 'nvim_lsp_document_symbol' },
+    { name = 'cmp-buffer' },
+    { name = 'cmp-path' },
+    { name = 'cmp-cmdline' },
+    { name = 'friendly-snippets' },
+    { name = 'cmp_luasnip' },
+    { name = 'LuaSnip' },
   },
   formatting = {
     format = lspkind.cmp_format(),
   },
 }
+cmp.setup.filetype('gitcommit', {
+  sources = cmp.config.sources({
+    { name = "git" },
+    { name = 'cmp_git' },
+  },
+    {
+    { name = 'buffer' },
+  }
+  )
+})
 
 require("cmp_git").setup()

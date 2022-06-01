@@ -18,31 +18,46 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(require('lsp_
   severity_sort = true
 })
 
+local signs = { Error = '✘', Warning = '', Hint = '', Information = '' }
+for type, icon in pairs(signs) do
+  local hl = 'LspDiagnosticsSign' .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
+end
+
 local lsp_formatting = function(bufnr)
   vim.lsp.buf.format({
-    filter = function(clients)
-      -- filter out clients that you don't want to use
-      return vim.tbl_filter(function(client)
-        return client.name ~= "tsserver"
-      end, clients)
-    end,
+    filter = function(client) return client.name ~= "tsserver" end,
     bufnr = bufnr,
   })
 end
 
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+local formatting_group = vim.api.nvim_create_augroup("LspFormatting", {})
 
 local on_attach = function(client, bufnr)
   if client.supports_method("textDocument/formatting") then
-    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_clear_autocmds({ group = formatting_group, buffer = bufnr })
     vim.api.nvim_create_autocmd("BufWritePre", {
-      group = augroup,
+      group = formatting_group,
       buffer = bufnr,
       callback = function()
         lsp_formatting(bufnr)
       end,
     })
   end
+  vim.api.nvim_create_autocmd("CursorHold", {
+    buffer = bufnr,
+    callback = function()
+      local opts = {
+        focusable = false,
+        close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+        border = 'rounded',
+        source = 'always',
+        prefix = ' ',
+        scope = 'cursor',
+      }
+      vim.diagnostic.open_float(nil, opts)
+    end
+  })
 end
 
 local capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -51,7 +66,7 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
   lspconfig[server.name].setup {
     capabilities = capabilities,
     on_attach = on_attach,
-    autostart = false
+    autostart = true
   }
 end
 
@@ -63,7 +78,7 @@ lspconfig.pyright.setup {
 
 lspconfig.tsserver.setup {
   capabilities = capabilities,
-  on_attach = function(client)
+  on_attach = function(client, bufnr)
     client.server_capabilities.document_formatting = false
     client.server_capabilities.document_range_formatting = false
     ts_utils.setup {
@@ -87,6 +102,7 @@ lspconfig.tsserver.setup {
     }
 
     ts_utils.setup_client(client)
+    on_attach(client, bufnr)
   end,
 }
 lspconfig.sumneko_lua.setup({
@@ -116,12 +132,28 @@ lspconfig.sumneko_lua.setup({
   }
 })
 
+
+local null_ls_sources = {
+  null_ls.builtins.diagnostics.eslint_d.with({
+    cwd = function(params)
+      return require("lspconfig.util").root_pattern("tsconfig.json")(params.bufname)
+    end,
+  }),
+  null_ls.builtins.code_actions.eslint_d.with({
+    cwd = function(params)
+      return require("lspconfig.util").root_pattern("tsconfig.json")(params.bufname)
+    end,
+  }),
+  null_ls.builtins.formatting.eslint_d.with({
+    cwd = function(params)
+      return require("lspconfig.util").root_pattern("tsconfig.json")(params.bufname)
+    end,
+  }),
+}
 null_ls.setup({
+  capabilities = capabilities,
   on_attach = on_attach,
+  autostart = true,
   debug = true,
-  sources = {
-    null_ls.builtins.diagnostics.eslint_d,
-    null_ls.builtins.code_actions.eslint_d,
-    null_ls.builtins.formatting.eslint_d
-  },
+  sources = null_ls_sources,
 })

@@ -53,6 +53,14 @@ local next_snippet_or_confirm = function(fallback)
   end
 end
 
+local completion_or_enter = function(fallback)
+  if cmp.get_selected_entry() then
+    cmp.confirm({ select = false })
+  else
+    fallback()
+  end
+end
+
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -66,11 +74,11 @@ cmp.setup {
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.confirm({ select = true }),
     ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping(next_snippet_or_confirm, { "i", "s" }),
     ["<Down>"] = cmp.mapping(jump_forwards, { "i", "s" }),
     ["<Tab>"] = cmp.mapping(next_snippet_or_confirm, { "i", "s" }),
     ["<S-Tab>"] = cmp.mapping(jump_backwards, { "i", "s" }),
     ["<Up>"] = cmp.mapping(jump_backwards, { "i", "s" }),
+    ["<CR>"] = cmp.mapping(completion_or_enter, { "i", "s" }),
   },
   sources = {
     { name = 'nvim_lsp' },
@@ -92,7 +100,6 @@ cmp.setup {
 cmp.setup.filetype('gitcommit', {
   sources = cmp.config.sources({
     { name = "git" },
-    { name = 'cmp_git' },
   },
     {
     { name = 'buffer' },

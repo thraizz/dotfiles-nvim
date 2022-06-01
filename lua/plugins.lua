@@ -27,16 +27,22 @@ return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   -- Emmet foo in <p>foo</p> with <C-y>,
   use 'mattn/emmet-vim'
-  use 'tpope/vim-surround'
   use {
-    'chentau/marks.nvim',
+    'chentoast/marks.nvim',
     config = function()
       require('marks').setup {}
     end
   }
-  use 'tpope/vim-repeat'
-  -- Comments enhanced
+  use("tpope/vim-repeat")
+  use {
+    'tpope/vim-fugitive',
+    requires = 'junegunn/gv.vim',
+  }
   use 'tpope/vim-commentary'
+  use("tpope/vim-surround")
+  use("tpope/vim-unimpaired")
+  use("tpope/vim-sleuth")
+  use("tpope/vim-eunuch")
   -- Cursor-dependent comment string for tsx files
   use 'JoosepAlviste/nvim-ts-context-commentstring'
   -- Jump anywhere easy
@@ -59,6 +65,30 @@ return require('packer').startup(function()
   -- Better terminal
   use 'vimlab/split-term.vim'
   -- Treesitter (Syntax detection engine) support
+  use('RRethy/nvim-treesitter-textsubjects') -- adds smart text objects
+  use {
+    'windwp/nvim-autopairs',
+    config = function()
+      local npairs = require("nvim-autopairs")
+      local Rule = require('nvim-autopairs.rule')
+      npairs.setup({
+        check_ts = true,
+        ts_config = {
+          lua = { 'string' }, -- it will not add a pair on that treesitter node
+          javascript = { 'template_string' },
+          java = false, -- don't check treesitter on java
+        }
+      })
+      local ts_conds = require('nvim-autopairs.ts-conds')
+      npairs.add_rules({
+        Rule("%", "%", "lua")
+            :with_pair(ts_conds.is_ts_node({ 'string', 'comment' })),
+        Rule("$", "$", "lua")
+            :with_pair(ts_conds.is_not_ts_node({ 'function' }))
+      })
+    end
+  }
+  use('windwp/nvim-ts-autotag') -- automatically close jsx tags
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
@@ -73,6 +103,13 @@ return require('packer').startup(function()
   use 'nvim-lua/plenary.nvim'
   use 'nvim-lua/lsp-status.nvim'
   use 'onsails/lspkind-nvim'
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {}
+    end
+  }
   -- Completion via nvim-cmp (snippets included)
   use {
     'hrsh7th/nvim-cmp',
@@ -80,9 +117,12 @@ return require('packer').startup(function()
       'petertriho/cmp-git',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lsp-signature-help',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
       'thraizz/friendly-snippets',
       'saadparwaiz1/cmp_luasnip',
-      'L3MON4D3/LuaSnip'
+      'L3MON4D3/LuaSnip',
     }
   }
   -- Pretty statusline (bottom) and buffers as tabs (top)
@@ -100,7 +140,6 @@ return require('packer').startup(function()
   }
   -- Pretty git experience
   use 'thraizz/git-blame.nvim'
-  use 'tpope/vim-fugitive'
   -- Icons for statusline and telescope
   use 'kyazdani42/nvim-web-devicons'
   -- Searcher+Picker

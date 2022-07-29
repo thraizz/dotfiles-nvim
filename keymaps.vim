@@ -1,25 +1,26 @@
 map <ESC> <ESC>:noh<CR>
 " Escape from insertmode with jj
 imap jj <ESC>:noh<CR>
-" preserve my pinkies health by using ; for :
-nnoremap ; :
 
 " Run file with F9
 noremap <F9> :!%:p<ENTER>
+" preserve my pinkies health by using ; for :
+nnoremap ; :
 
 " Telescope
 "" Show keymaps
 nnoremap  <leader><leader> <cmd>Telescope keymaps<cr>
 "" Show files
-nnoremap  <leader>fd <cmd>Telescope buffers theme=dropdown<cr>
+nnoremap  <leader>fd <cmd>Telescope buffers sort_lastused=true ignore_current_buffer=true theme=ivy<cr>
 nnoremap  <leader>fo <cmd>Telescope oldfiles cwd_only=true include_current_session=true<cr>
 nnoremap  <leader>fO <cmd>Telescope oldfiles cwd_only=true include_current_session=true<cr>
 nnoremap  <leader>ff <cmd>Telescope find_files sort_lastused=true hidden=true<cr>
 xnoremap  <leader>ff y<cmd>Telescope find_files<cr><c-r>"
 nnoremap  <leader>fc <cmd>Telescope current_buffer_fuzzy_find<cr>
-nnoremap  <leader>fp <cmd>Telescope oldfiles cwd_only=true<cr>
+nnoremap  <leader>fp <cmd>Telescope oldfiles cwd_only=true theme=ivy <cr>
 nnoremap  <leader>fP <cmd>Telescope oldfiles<cr>
-nnoremap  <leader>fs <cmd>Telescope live_grep_args<cr>
+nnoremap  <leader>fs <cmd>Telescope live_grep grep_open_files=true theme=ivy<cr>
+nnoremap  <leader>fS <cmd>Telescope live_grep_args<cr>
 xnoremap  <leader>fs y<cmd>lua require'telescope.builtin'.live_grep(require('telescope.themes').get_dropdown({}))<cr><c-r>"
 nnoremap  <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap  <leader>fn <cmd>Telescope file_browser<cr>

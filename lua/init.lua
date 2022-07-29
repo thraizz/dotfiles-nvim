@@ -9,10 +9,6 @@ require "settings"
 require "apiKeys"
 
 
-vim.api.nvim_set_keymap('n', ',', '', {})
-vim.g.mapleader = ','
-
-
 local copyJSONPath = function()
   local ts_utils = require 'nvim-treesitter.ts_utils'
   local result = {};

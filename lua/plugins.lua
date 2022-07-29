@@ -48,8 +48,8 @@ return require('packer').startup(function()
   -- Jump anywhere easy
   use 'justinmk/vim-sneak'
   -- Note taking with :Note something
-  use 'xolox/vim-notes'
-  use 'xolox/vim-misc'
+  -- use 'xolox/vim-notes'
+  -- use 'xolox/vim-misc'
   -- Markdown enhancers
   -- tabular plugin is used to format tables
   use 'godlygeek/tabular'
@@ -148,7 +148,7 @@ return require('packer').startup(function()
     requires = {
       {
         'nvim-telescope/telescope-file-browser.nvim',
-        'nvim-telescope/telescope-live-grep-raw.nvim',
+        'nvim-telescope/telescope-live-grep-args.nvim',
         'natecraddock/telescope-zf-native.nvim'
       }
     }
@@ -167,10 +167,10 @@ return require('packer').startup(function()
   use 'jose-elias-alvarez/nvim-lsp-ts-utils'
   use 'jose-elias-alvarez/null-ls.nvim'
   -- Vue specific configuration
-  use 'posva/vim-vue'
+  -- use 'posva/vim-vue'
   use 'mxw/vim-jsx'
   use 'pangloss/vim-javascript'
-  -- use 'lepture/vim-jinja'
+  use 'lepture/vim-jinja'
   -- Automatic window resizer
   use {
     'beauwilliams/focus.nvim',
@@ -180,4 +180,5 @@ return require('packer').startup(function()
   }
   -- Colorschemes
   use 'marko-cerovac/material.nvim'
+
 end)

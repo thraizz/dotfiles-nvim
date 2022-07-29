@@ -1,15 +1,15 @@
 local actions = require('telescope.actions')
 require("telescope").setup {
   defaults = {
-    theme = { "dropdown" },
-    path_display = { "smart" },
+    theme = { "ivy" },
+    path_display = { "truncate" },
     layout_config = {
       bottom_pane = { width = 0.9 },
       vertical = { width = 0.9 },
       center = { width = 0.9 },
       horizontal = { width = 0.9 }
     },
-    file_ignore_patterns = { "venv/" },
+    file_ignore_patterns = { "venv/", "package-lock.json", ".*.snap", ".git/" },
     color_devicons = true,
     mappings = {
       i = {
@@ -24,15 +24,6 @@ require("telescope").setup {
     },
   },
   pickers = {
-    find_files            = {
-      theme = "dropdown",
-    },
-    oldfiles              = {
-      theme = "dropdown",
-    },
-    live_grep             = {
-      theme = "dropdown",
-    },
     lsp_workspace_symbols = {
       theme = "cursor",
     },
@@ -70,3 +61,4 @@ require("telescope").setup {
 
 require("telescope").load_extension("zf-native")
 require("telescope").load_extension("file_browser")
+require("telescope").load_extension("live_grep_args")

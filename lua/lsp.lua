@@ -43,7 +43,6 @@ local on_attach = function(client, bufnr)
       local opts = {
         focusable = false,
         close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-        border = 'rounded',
         source = 'always',
         prefix = ' ',
         scope = 'cursor',
@@ -69,7 +68,41 @@ lspconfig.pyright.setup {
   autostart = false
 }
 
+lspconfig.stylelint_lsp.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  autostart = false
+}
+
+lspconfig.sumneko_lua.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+        -- Setup your lua path
+        path = runtime_path,
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = { 'vim' },
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
+  }
+})
+
 lspconfig.tsserver.setup {
+  init_options = require("nvim-lsp-ts-utils").init_options,
   capabilities = capabilities,
   on_attach = function(client, bufnr)
     client.server_capabilities.document_formatting = false
@@ -98,33 +131,6 @@ lspconfig.tsserver.setup {
     on_attach(client, bufnr)
   end,
 }
-lspconfig.sumneko_lua.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-        -- Setup your lua path
-        path = runtime_path,
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
-    },
-  }
-})
-
 
 local null_ls_sources = {
   null_ls.builtins.diagnostics.eslint_d.with({
@@ -149,4 +155,11 @@ null_ls.setup({
   autostart = true,
   debug = true,
   sources = null_ls_sources,
+})
+require("typescript").setup({
+  disable_commands = false, -- prevent the plugin from creating Vim commands
+  debug = false, -- enable debug logging for commands
+  server = { -- pass options to lspconfig's setup method
+    on_attach = on_attach
+  },
 })

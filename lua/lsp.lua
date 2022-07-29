@@ -11,13 +11,6 @@ table.insert(runtime_path, "lua/?/init.lua")
 lsp_installer.setup {}
 lsp_status.register_progress()
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(require('lsp_extensions.workspace.diagnostic').handler, {
-  underline = true,
-  signs = true,
-  update_in_insert = false, -- delay update
-  severity_sort = true
-})
-
 local signs = { Error = '✘', Warning = '', Hint = '', Information = '' }
 for type, icon in pairs(signs) do
   local hl = 'LspDiagnosticsSign' .. type

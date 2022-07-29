@@ -10,6 +10,8 @@ g.indentLine_char = '·'
 g.indentLine_enabled = 1
 g.indentLine_fileTypeExclude = { "notes", "json" }
 g.vim_json_syntax_conceal = 0
+g.mapleader = ','
+
 
 -- Markdown syntax options by https://jdhao.github.io/2019/01/15/markdown_edit_preview_nvim/
 -- disable header folding
@@ -57,13 +59,17 @@ cmd('set wildmenu')
 cmd('set showmatch')
 cmd('set incsearch')
 cmd('set smartcase')
---cmd('set foldenable')
---cmd('set foldlevelstart=10')
---cmd('set foldnestmax=10')
---cmd('set foldmethod=expr')
---cmd('set foldexpr=nvim_treesitter#foldexpr()')
+cmd('set foldenable')
+cmd('set foldlevelstart=10')
+cmd('set foldnestmax=10')
+cmd('set foldmethod=expr')
+cmd('set foldexpr=nvim_treesitter#foldexpr()')
 cmd('set completeopt=menu,menuone,noselect')
 cmd('set shortmess+=c')
 cmd('set switchbuf=vsplit')
 cmd('set noshowmode')
 cmd('set listchars+=eol:↴')
+cmd('set nowrap')
+cmd('set updatetime=100')
+
+vim.api.nvim_set_keymap('n', ',', '', {})

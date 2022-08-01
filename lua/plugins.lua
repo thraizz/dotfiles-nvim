@@ -98,7 +98,6 @@ return require('packer').startup(function()
   -- LSP Configuration
   use 'neovim/nvim-lspconfig'
   use 'williamboman/nvim-lsp-installer'
-  use 'nvim-lua/lsp_extensions.nvim'
   use 'nvim-lua/popup.nvim'
   use 'nvim-lua/plenary.nvim'
   use 'nvim-lua/lsp-status.nvim'
@@ -141,7 +140,12 @@ return require('packer').startup(function()
   -- Pretty git experience
   use 'thraizz/git-blame.nvim'
   -- Icons for statusline and telescope
-  use 'kyazdani42/nvim-web-devicons'
+  use {
+    'kyazdani42/nvim-web-devicons',
+    config = function()
+      require('nvim-web-devicons').setup {}
+    end
+  }
   -- Searcher+Picker
   use {
     'nvim-telescope/telescope.nvim',

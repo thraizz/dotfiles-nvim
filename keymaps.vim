@@ -21,7 +21,7 @@ nnoremap  <leader>fp <cmd>Telescope oldfiles cwd_only=true theme=ivy <cr>
 nnoremap  <leader>fP <cmd>Telescope oldfiles<cr>
 nnoremap  <leader>fs <cmd>Telescope live_grep grep_open_files=true theme=ivy<cr>
 nnoremap  <leader>fS <cmd>Telescope live_grep_args<cr>
-xnoremap  <leader>fs y<cmd>lua require'telescope.builtin'.live_grep(require('telescope.themes').get_dropdown({}))<cr><c-r>"
+xnoremap  <leader>fs <cmd>Telescope grep_string<cr>
 nnoremap  <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap  <leader>fn <cmd>Telescope file_browser<cr>
 map       <leader>fN <cmd>Telescope file_browser path=%:p:h<cr>

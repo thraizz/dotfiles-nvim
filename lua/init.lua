@@ -24,3 +24,38 @@ local copyJSONPath = function()
 end
 
 vim.keymap.set('n', '<leader>cp', copyJSONPath)
+
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+
+local function filterReactDTS(value)
+  return string.match(value.filename, 'react/index.d.ts') == nil
+end
+
+local function filter(arr, fn)
+  if type(arr) ~= "table" then
+    return arr
+  end
+
+  local filtered = {}
+  for k, v in pairs(arr) do
+    if fn(v, k, arr) then
+      table.insert(filtered, v)
+    end
+  end
+
+  return filtered
+end
+
+local function on_list(options)
+  local items = options.items
+  if #items > 1 then
+    items = filter(items, filterReactDTS)
+  end
+
+  vim.fn.setqflist({}, ' ', { title = options.title, items = items, context = options.context })
+  vim.api.nvim_command('cfirst')
+end
+
+vim.keymap.set('n', '<leader>ld',
+  function() vim.cmd('vsplit') vim.lsp.buf.definition { on_list = on_list } vim.cmd('norm zz') end)

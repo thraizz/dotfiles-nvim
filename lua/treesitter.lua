@@ -7,6 +7,9 @@ require 'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = true,
     disable = { "html" },
   },
+  fold = {
+    enable = true,
+  },
   indent = {
     enable = true,
     disable = { "python" },

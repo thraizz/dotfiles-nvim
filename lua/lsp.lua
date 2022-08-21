@@ -1,6 +1,6 @@
 local lspconfig = require('lspconfig')
-local null_ls = require("null-ls")
 local ts_utils = require("nvim-lsp-ts-utils")
+local null_ls = require("null-ls")
 local lsp_status = require('lsp-status')
 local lsp_installer = require("nvim-lsp-installer")
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
@@ -94,7 +94,7 @@ lspconfig.sumneko_lua.setup({
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
+        globals = { 'vim', 'packer' },
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
@@ -112,7 +112,7 @@ lspconfig.tsserver.setup {
   init_options = require("nvim-lsp-ts-utils").init_options,
   capabilities = capabilities,
   on_attach = function(client, bufnr)
-    client.server_capabilities.document_formatting = false
+    client.server_capabilities.document_formatting = true
     client.server_capabilities.document_range_formatting = false
     ts_utils.setup {
       -- import all
@@ -140,20 +140,22 @@ lspconfig.tsserver.setup {
 }
 
 local null_ls_sources = {
-  null_ls.builtins.diagnostics.eslint_d.with({
-    cwd = function(params)
-      return require("lspconfig.util").root_pattern("tsconfig.json")(params.bufname)
-    end,
-  }),
-  null_ls.builtins.code_actions.eslint_d.with({
-    cwd = function(params)
-      return require("lspconfig.util").root_pattern("tsconfig.json")(params.bufname)
-    end,
-  }),
-  null_ls.builtins.formatting.eslint_d.with({
-    cwd = function(params)
-      return require("lspconfig.util").root_pattern("tsconfig.json")(params.bufname)
-    end,
+  -- null_ls.builtins.diagnostics.eslint_d.with({
+  --   cwd = function(params)
+  --     return require("lspconfig.util").root_pattern("tsconfig.json")(params.bufname)
+  --   end,
+  -- }),
+  -- null_ls.builtins.code_actions.eslint_d.with({
+  --   cwd = function(params)
+  --     return require("lspconfig.util").root_pattern("tsconfig.json")(params.bufname)
+  --   end,
+  -- }),
+  -- null_ls.builtins.formatting.eslint_d.with({
+  --   cwd = function(params)
+  --     return require("lspconfig.util").root_pattern("tsconfig.json")(params.bufname)
+  --   end,
+  null_ls.builtins.formatting.prettier.with({
+    filetypes = { "scss", "json", "yaml", "markdown", "css" },
   }),
 }
 null_ls.setup({

@@ -54,7 +54,7 @@ return require('packer').startup(function()
   -- tabular plugin is used to format tables
   use 'godlygeek/tabular'
   -- JSON front matter highlight plugin
-  use 'elzr/vim-json'
+  -- use 'elzr/vim-json'
   use 'plasticboy/vim-markdown'
   -- Give hints on current indent
   use 'Yggdroot/indentLine'
@@ -93,7 +93,12 @@ return require('packer').startup(function()
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
-  use 'nvim-treesitter/nvim-treesitter-angular'
+  use {
+    'napmn/react-extract.nvim',
+    config = function()
+      require("react-extract").setup()
+    end
+  }
   use 'SmiteshP/nvim-gps'
   -- LSP Configuration
   use 'neovim/nvim-lspconfig'

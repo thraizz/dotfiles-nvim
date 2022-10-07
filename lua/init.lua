@@ -85,8 +85,9 @@ local function jump_to_location(location, offset_encoding, reuse_win)
     api.nvim_set_current_win(win)
   else
     api.nvim_buf_set_option(bufnr, 'buflisted', true)
-    vim.cmd("vnew")
+    vim.cmd("vs")
     api.nvim_set_current_buf(bufnr)
+    vim.cmd("norm zz")
   end
   local range = location.range or location.targetSelectionRange
   local row = range.start.line
@@ -130,7 +131,6 @@ vim.keymap.set(
   'n', '<leader>ld',
   function()
     vim.lsp.buf.definition { reuse_win = true }
-    vim.cmd('norm zz')
   end
 )
 

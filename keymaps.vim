@@ -40,7 +40,7 @@ nnoremap  <leader>lr <cmd>Telescope lsp_references<cr>
 nnoremap  K          <cmd>lua vim.lsp.buf.hover()<cr>
 nnoremap  <leader>ln <cmd>lua vim.lsp.buf.rename()<cr>
 nnoremap  <leader>dn <cmd>lua vim.diagnostic.goto_next({severity={min=vim.diagnostic.severity.WARN}})<cr>zz
-nnoremap  <leader>dN <cmd>lua vim.diagnostic.goto_previous({severity={min=vim.diagnostic.severity.WARN}})<cr>zz
+nnoremap  <leader>dN <cmd>lua vim.diagnostic.goto_prev({severity={min=vim.diagnostic.severity.WARN}})<cr>zz
 
 "" Show Git stuff
 nnoremap  <leader>gs  <cmd>vertical Git<cr>

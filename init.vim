@@ -6,4 +6,4 @@ autocmd FileType typescriptreact setlocal commentstring={/*\ %s\ */}
 
 autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
 
-command CreateScss vs expand("%:p:r").scss
+command CreateScss norm :vs expand("%:p:r")<cr>

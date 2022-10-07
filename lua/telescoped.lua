@@ -1,15 +1,16 @@
 local actions = require('telescope.actions')
+local fb_actions = require "telescope".extensions.file_browser.actions
 require("telescope").setup {
   defaults = {
     theme = { "ivy" },
-    path_display = { "truncate" },
+    path_display = { shorten = { len = 3, exclude = { 1, -1 } } },
     layout_config = {
       bottom_pane = { width = 0.9 },
       vertical = { width = 0.9 },
       center = { width = 0.9 },
       horizontal = { width = 0.9 }
     },
-    file_ignore_patterns = { "venv/", "package-lock.json", ".*.snap", ".git/" },
+    file_ignore_patterns = { "venv/", "node_modules", "package-lock.json", ".*.snap", ".git/" },
     color_devicons = true,
     mappings = {
       i = {
@@ -18,7 +19,6 @@ require("telescope").setup {
         ["<C-k>"] = actions.move_selection_previous,
         ["<C-y>"] = actions.send_to_loclist,
         ["<C-t>"] = actions.select_tab,
-        ["<C-n>"] = actions.cycle_history_next,
         ["<C-p>"] = actions.cycle_history_prev,
       },
     },
@@ -30,6 +30,32 @@ require("telescope").setup {
     lsp_references        = {
       theme = "cursor",
     },
+    buffers               = {
+      show_all_buffers = true,
+      sort_lastused = true,
+      ignore_current_buffer = true,
+      theme = "ivy",
+      mappings = {
+        i = {
+          ["<c-d>"] = "delete_buffer",
+        }
+      }
+    },
+    -- file_browser          = {
+    --   theme = "dropdown",
+    --   respect_gitignore = true,
+    --   mappings = {
+    --     i = {
+    --       ["<Leader>n"] = fb_actions.create,
+    --       ["C-n>"] = fb_actions.create,
+    --       ["<C-r>"] = fb_actions.rename,
+    --     }
+    --   }
+    -- },
+    oldfiles              = {
+      cwd_only = true,
+      include_current_session = true,
+    }
   },
   extensions = {
     ["zf-native"] = {
@@ -54,7 +80,15 @@ require("telescope").setup {
     },
     file_browser = {
       theme = "dropdown",
-      respect_gitignore = true
+      respect_gitignore = true,
+      mappings = {
+        i = {
+          ["<Leader>n"] = fb_actions.create,
+          ["<Leader>d"] = fb_actions.remove,
+          ["<C-n>"] = fb_actions.create,
+          ["<C-r>"] = fb_actions.rename,
+        }
+      }
     }
   }
 }

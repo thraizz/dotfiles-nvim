@@ -69,17 +69,17 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
   }
 end
 
-lspconfig.pyright.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  autostart = false
-}
+-- lspconfig.pyright.setup {
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+--   autostart = false
+-- }
 
-lspconfig.stylelint_lsp.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  autostart = false
-}
+-- lspconfig.stylelint_lsp.setup {
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+--   autostart = false
+-- }
 
 lspconfig.sumneko_lua.setup({
   capabilities = capabilities,
@@ -109,10 +109,10 @@ lspconfig.sumneko_lua.setup({
 })
 
 lspconfig.tsserver.setup {
-  init_options = require("nvim-lsp-ts-utils").init_options,
+  -- init_options = require("nvim-lsp-ts-utils").init_options,
   capabilities = capabilities,
   on_attach = function(client, bufnr)
-    client.server_capabilities.document_formatting = true
+    client.server_capabilities.document_formatting = false
     client.server_capabilities.document_range_formatting = false
     ts_utils.setup {
       -- import all
@@ -130,8 +130,7 @@ lspconfig.tsserver.setup {
       eslint_enable_code_actions = true,
       eslint_enable_disable_comments = true,
       eslint_bin = "eslint_d",
-      eslint_enable_diagnostics = true,
-      eslint_opts = {},
+      eslint_enable_diagnostics = false,
     }
 
     ts_utils.setup_client(client)
@@ -139,36 +138,37 @@ lspconfig.tsserver.setup {
   end,
 }
 
-local null_ls_sources = {
-  -- null_ls.builtins.diagnostics.eslint_d.with({
-  --   cwd = function(params)
-  --     return require("lspconfig.util").root_pattern("tsconfig.json")(params.bufname)
-  --   end,
-  -- }),
-  -- null_ls.builtins.code_actions.eslint_d.with({
-  --   cwd = function(params)
-  --     return require("lspconfig.util").root_pattern("tsconfig.json")(params.bufname)
-  --   end,
-  -- }),
-  -- null_ls.builtins.formatting.eslint_d.with({
-  --   cwd = function(params)
-  --     return require("lspconfig.util").root_pattern("tsconfig.json")(params.bufname)
-  --   end,
-  null_ls.builtins.formatting.prettier.with({
-    filetypes = { "scss", "json", "yaml", "markdown", "css" },
-  }),
-}
-null_ls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  autostart = true,
-  debug = true,
-  sources = null_ls_sources,
-})
+-- local null_ls_sources = {
+--   -- null_ls.builtins.diagnostics.eslint_d.with({
+--   --   cwd = function(params)
+--   --     return require("lspconfig.util").root_pattern("tsconfig.json")(params.bufname)
+--   --   end,
+--   -- }),
+--   -- null_ls.builtins.code_actions.eslint_d.with({
+--   --   cwd = function(params)
+--   --     return require("lspconfig.util").root_pattern("tsconfig.json")(params.bufname)
+--   --   end,
+--   -- }),
+--   -- null_ls.builtins.formatting.eslint_d.with({
+--   --   cwd = function(params)
+--   --     return require("lspconfig.util").root_pattern("tsconfig.json")(params.bufname)
+--   --   end,
+--   -- }),
+--   null_ls.builtins.formatting.prettier.with({
+--     filetypes = { "scss", "json", "yaml", "markdown", "css" },
+--   }),
+-- }
+-- null_ls.setup({
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+--   autostart = true,
+--   debug = true,
+--   sources = null_ls_sources,
+-- })
 require("typescript").setup({
   disable_commands = false, -- prevent the plugin from creating Vim commands
   debug = false, -- enable debug logging for commands
   server = { -- pass options to lspconfig's setup method
-    on_attach = on_attach
+    on_attach = on_attach,
   },
 })

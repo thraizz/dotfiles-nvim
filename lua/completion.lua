@@ -81,17 +81,16 @@ cmp.setup {
     ["<CR>"] = cmp.mapping(completion_or_enter, { "i", "s" }),
   },
   sources = {
-    { name = 'nvim_lsp' },
-    { name = 'nvim_lsp_signature_help' },
-    { name = 'luasnip' },
     { name = 'cmp-nvim-lsp' },
-    { name = 'nvim_lsp_document_symbol' },
+    { name = 'cmp-cmdline' },
     { name = 'cmp-buffer' },
     { name = 'cmp-path' },
-    { name = 'cmp-cmdline' },
-    { name = 'friendly-snippets' },
     { name = 'cmp_luasnip' },
-    { name = 'LuaSnip' },
+    { name = 'nvim_lsp' },
+    -- { name = 'nvim_lsp_signature_help' },
+    -- { name = 'nvim_lsp_document_symbol' },
+    { name = 'luasnip' },
+    { name = 'friendly-snippets' },
   },
   formatting = {
     format = lspkind.cmp_format(),
@@ -102,8 +101,8 @@ cmp.setup.filetype('gitcommit', {
     { name = "git" },
   },
     {
-    { name = 'buffer' },
-  }
+      { name = 'buffer' },
+    }
   )
 })
 

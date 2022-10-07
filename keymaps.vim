@@ -11,14 +11,14 @@ nnoremap ; :
 "" Show keymaps
 nnoremap  <leader><leader> <cmd>Telescope keymaps<cr>
 "" Show files
-nnoremap  <leader>fd <cmd>Telescope buffers sort_lastused=true ignore_current_buffer=true theme=ivy<cr>
+nnoremap  <leader>fd <cmd>Telescope buffers <cr>
 nnoremap  <leader>fo <cmd>Telescope oldfiles cwd_only=true include_current_session=true<cr>
 nnoremap  <leader>fO <cmd>Telescope oldfiles cwd_only=true include_current_session=true<cr>
 nnoremap  <leader>ff <cmd>Telescope find_files sort_lastused=true hidden=true<cr>
 xnoremap  <leader>ff y<cmd>Telescope find_files<cr><c-r>"
 nnoremap  <leader>fc <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap  <leader>fp <cmd>Telescope oldfiles cwd_only=true theme=ivy <cr>
-nnoremap  <leader>fP <cmd>Telescope oldfiles<cr>
+nnoremap  <leader>fP <cmd>Telescope oldfiles cwd_only=false<cr>
 nnoremap  <leader>fs <cmd>Telescope live_grep grep_open_files=true theme=ivy<cr>
 nnoremap  <leader>fS <cmd>Telescope live_grep_args<cr>
 xnoremap  <leader>fs <cmd>Telescope grep_string<cr>

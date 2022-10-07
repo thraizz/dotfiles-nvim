@@ -56,8 +56,8 @@ return require('packer').startup(function()
   -- JSON front matter highlight plugin
   -- use 'elzr/vim-json'
   use 'plasticboy/vim-markdown'
-  -- Give hints on current indent
-  use 'Yggdroot/indentLine'
+  -- -- Give hints on current indent
+  -- use 'Yggdroot/indentLine'
   -- Ultra focus mode for current file with :Goyo
   use 'junegunn/goyo.vim'
   -- Ascii art generator with :FIGlet foo

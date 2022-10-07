@@ -141,3 +141,10 @@ end
 function _G.createTest()
   vim.cmd("vs %:p:r.test.tsx")
 end
+
+vim.keymap.set(
+  'n', '<leader>w',
+  function()
+    require('nvim-window').pick()
+  end
+)

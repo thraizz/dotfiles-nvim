@@ -191,5 +191,6 @@ return require('packer').startup(function()
   }
   -- Colorschemes
   use 'marko-cerovac/material.nvim'
+  use 'https://gitlab.com/yorickpeterse/nvim-window.git'
 
 end)

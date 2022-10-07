@@ -41,17 +41,6 @@ require("telescope").setup {
         }
       }
     },
-    -- file_browser          = {
-    --   theme = "dropdown",
-    --   respect_gitignore = true,
-    --   mappings = {
-    --     i = {
-    --       ["<Leader>n"] = fb_actions.create,
-    --       ["C-n>"] = fb_actions.create,
-    --       ["<C-r>"] = fb_actions.rename,
-    --     }
-    --   }
-    -- },
     oldfiles              = {
       cwd_only = true,
       include_current_session = true,
@@ -85,8 +74,8 @@ require("telescope").setup {
         i = {
           ["<Leader>n"] = fb_actions.create,
           ["<Leader>d"] = fb_actions.remove,
-          ["<C-n>"] = fb_actions.create,
-          ["<C-r>"] = fb_actions.rename,
+          ["<Leader>r"] = fb_actions.rename,
+          ["<Leader>m"] = fb_actions.move,
         }
       }
     }

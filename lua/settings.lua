@@ -73,5 +73,6 @@ cmd('set noshowmode')
 cmd('set listchars+=eol:↴')
 cmd('set nowrap')
 cmd('set updatetime=100')
+cmd('set winminwidth=10')
 
 vim.api.nvim_set_keymap('n', ',', '', {})

@@ -1,16 +1,19 @@
-map <ESC> <ESC>:noh<CR>
+map <ESC> <ESC>:noh<cr>
 " Escape from insertmode with jj
-imap jj <ESC>:noh<CR>
+imap jj <ESC>:noh<cr>
 
+noremap <F4> <cmd>FocusMaxOrEqual<cr>
 " Run file with F9
-noremap <F9> :!%:p<ENTER>
+noremap <F9> :!%:p<cr>
 " preserve my pinkies health by using ; for :
-nnoremap ; :
+" nnoremap ; :
 
 " Telescope
 "" Show keymaps
 nnoremap  <leader><leader> <cmd>Telescope keymaps<cr>
 "" Show files
+nnoremap  <leader>N  <cmd>NvimTreeToggle<cr>
+nnoremap  <leader>nn  <cmd>NnnPicker<cr>
 nnoremap  <leader>fd <cmd>Telescope buffers <cr>
 nnoremap  <leader>fo <cmd>Telescope oldfiles cwd_only=true include_current_session=true<cr>
 nnoremap  <leader>fO <cmd>Telescope oldfiles cwd_only=true include_current_session=true<cr>
@@ -20,7 +23,7 @@ nnoremap  <leader>fc <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap  <leader>fp <cmd>Telescope oldfiles cwd_only=true theme=ivy <cr>
 nnoremap  <leader>fP <cmd>Telescope oldfiles cwd_only=false<cr>
 nnoremap  <leader>fs <cmd>Telescope live_grep grep_open_files=true theme=ivy<cr>
-nnoremap  <leader>fS <cmd>Telescope live_grep_args<cr>
+nnoremap  <leader>fS <cmd>Telescope live_grep<cr>
 xnoremap  <leader>fs <cmd>Telescope grep_string<cr>
 nnoremap  <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap  <leader>fn <cmd>Telescope file_browser path=%:p:h<cr>
@@ -28,7 +31,6 @@ nnoremap  <leader>fN <cmd>Telescope file_browser<cr>
 nnoremap  <leader>fm <cmd>Telescope marks<cr>
 nnoremap  <leader>fl <cmd>Telescope jumplist<cr>
 "" Show LSP stuff
-inoremap  <leader>la <cmd>lua vim.lsp.buf.code_action()<cr>
 nnoremap  <A-Cr> <cmd>lua vim.lsp.buf.code_action()<cr>
 nnoremap  <leader>lfd <cmd>Telescope diagnostics<cr>
 nnoremap  <leader>lD <cmd>Telescope lsp_definitions jump_type=never theme=cursor<cr>
@@ -63,4 +65,3 @@ vnoremap <leader>rc   <cmd>lua require("react-extract").extract_to_current_file(
 " Jump between merge conflicts with F8
 map <F8> /^\(<\{7\}\\|>\{7\}\\|=\{7\}\\|\|\{7\}\)\( \\|$\)<cr>
 
-inoremap <leader><Tab> <Cmd>lua require('cmp').complete()<CR>

@@ -11,13 +11,18 @@ end
 local luasnip = require 'luasnip'
 local cmp = require 'cmp'
 local lspkind = require('lspkind')
+local open_or_confirm = function()
+  if cmp.visible() then
+    cmp.confirm({ select = true })
+  else
+    cmp.complete()
+  end
+end
 local jump_forwards = function(fallback)
   if cmp.visible() then
     cmp.select_next_item()
   elseif luasnip.expand_or_jumpable() then
     luasnip.expand_or_jump()
-  elseif has_words_before() then
-    cmp.complete()
   else
     fallback()
   end
@@ -69,10 +74,10 @@ cmp.setup {
   },
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.confirm(),
+    ['<C-n>'] = cmp.mapping.confirm({ select = true }),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-2),
+    ['<C-f>'] = cmp.mapping.scroll_docs(2),
+    ['<C-Space>'] = cmp.mapping(open_or_confirm, { "i", "s" }),
     ['<C-e>'] = cmp.mapping.close(),
     ["<Down>"] = cmp.mapping(jump_forwards, { "i", "s" }),
     ["<Tab>"] = cmp.mapping(next_snippet_or_confirm, { "i", "s" }),
@@ -81,10 +86,8 @@ cmp.setup {
     ["<CR>"] = cmp.mapping(completion_or_enter, { "i", "s" }),
   },
   sources = {
-    -- { name = 'cmdline' },
     { name = 'path' },
     { name = 'nvim_lsp' },
-    { name = 'nvim_lsp_signature_help' },
     { name = 'nvim_lsp_document_symbol' },
     { name = 'buffer' },
     { name = 'omni' },

@@ -1,6 +1,5 @@
 local lspconfig = require('lspconfig')
 local ts_utils = require("nvim-lsp-ts-utils")
-local null_ls = require("null-ls")
 local lsp_status = require('lsp-status')
 local lsp_installer = require("nvim-lsp-installer")
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
@@ -69,11 +68,11 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
   }
 end
 
--- lspconfig.pyright.setup {
---   capabilities = capabilities,
---   on_attach = on_attach,
---   autostart = false
--- }
+lspconfig.pyright.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  autostart = false
+}
 
 -- lspconfig.stylelint_lsp.setup {
 --   capabilities = capabilities,

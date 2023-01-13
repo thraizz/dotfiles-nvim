@@ -3,7 +3,6 @@ local fb_actions = require "telescope".extensions.file_browser.actions
 require("telescope").setup {
   defaults = {
     theme = { "ivy" },
-    path_display = { shorten = { len = 3, exclude = { 1, -1 } } },
     layout_config = {
       bottom_pane = { width = 0.9 },
       vertical = { width = 0.9 },
@@ -24,13 +23,30 @@ require("telescope").setup {
     },
   },
   pickers = {
-    lsp_workspace_symbols = {
-      theme = "cursor",
+    live_grep  = {
+      additional_args = function()
+        return { "--hidden" }
+      end,
+      glob_pattern = {
+        '!yarn.lock',
+        '!package-lock.json',
+        '!Pipfile.lock',
+      }
     },
-    lsp_references        = {
-      theme = "cursor",
+    find_files = {
+      find_command = {
+        'fd',
+        '--type',
+        'file',
+        '--type',
+        'symlink',
+        '--hidden',
+        '--exclude',
+        '.git',
+        -- put your other patterns here
+      }
     },
-    buffers               = {
+    buffers    = {
       show_all_buffers = true,
       sort_lastused = true,
       ignore_current_buffer = true,
@@ -41,7 +57,7 @@ require("telescope").setup {
         }
       }
     },
-    oldfiles              = {
+    oldfiles   = {
       cwd_only = true,
       include_current_session = true,
     }

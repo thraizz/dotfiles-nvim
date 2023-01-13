@@ -64,8 +64,6 @@ return require('packer').startup(function()
   use 'fadein/vim-FIGlet'
   -- Better terminal
   use 'vimlab/split-term.vim'
-  -- Treesitter (Syntax detection engine) support
-  use('RRethy/nvim-treesitter-textsubjects') -- adds smart text objects
   use {
     'windwp/nvim-autopairs',
     config = function()
@@ -93,6 +91,7 @@ return require('packer').startup(function()
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
+  use 'nvim-treesitter/nvim-treesitter-textobjects'
   use {
     'napmn/react-extract.nvim',
     config = function()
@@ -129,19 +128,18 @@ return require('packer').startup(function()
       'L3MON4D3/LuaSnip',
     }
   }
-  -- Pretty statusline (bottom) and buffers as tabs (top)
   use 'hoob3rt/lualine.nvim'
-  use {
-    'akinsho/bufferline.nvim',
-    config = function()
-      require('bufferline').setup {
-        options = {
-          diagnostics = 'nvim_lsp',
-          mode = 'tabs',
-        }
-      }
-    end
-  }
+  -- use {
+  --   'akinsho/bufferline.nvim',
+  --   config = function()
+  --     require('bufferline').setup {
+  --       options = {
+  --         diagnostics = 'nvim_lsp',
+  --         mode = 'tabs',
+  --       }
+  --     }
+  --   end
+  -- }
   -- Pretty git experience
   use 'thraizz/git-blame.nvim'
   -- Icons for statusline and telescope
@@ -182,15 +180,72 @@ return require('packer').startup(function()
   use 'mxw/vim-jsx'
   use 'pangloss/vim-javascript'
   use 'lepture/vim-jinja'
+  use 'prettier/vim-prettier'
+  use({
+    "andythigpen/nvim-coverage",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("coverage").setup({
+        commands = true, -- create commands
+        summary = {
+          -- customize the summary pop-up
+          min_coverage = 80.0, -- minimum coverage threshold (used for highlighting)
+        },
+        lang = {
+          -- customize language specific settings
+        },
+      })
+    end,
+  })
   -- Automatic window resizer
   use {
     'beauwilliams/focus.nvim',
     config = function()
-      require('focus').setup({ signcolumn = false, excluded_filetypes = { 'telescope' } })
+      require('focus').setup({
+        autoresize = false,
+        hybridnumber = false,
+        signcolumn = false,
+        winhighlight = false,
+        excluded_filetypes = { 'telescope', 'NvimTree' }
+      })
     end
   }
-  -- Colorschemes
+  -- Colorschemes / themes
   use 'marko-cerovac/material.nvim'
   use 'https://gitlab.com/yorickpeterse/nvim-window.git'
+  use 'sainnhe/sonokai'
+  use 'tiagovla/tokyodark.nvim'
+  use 'projekt0n/github-nvim-theme'
+  -- use 'joshdick/onedark.vim'
+  -- use { 'catppuccin/nvim', as='catppuccin' }
+  -- use { 'sonph/onehalf', rtp='vim/' }
+  -- use 'liuchengxu/space-vim-dark'
+  -- use 'ahmedabdulrahman/aylin.vim'
+  -- use 'rebelot/kanagawa.nvim'
+  use 'NLKNguyen/papercolor-theme'
+  use 'liuchengxu/space-vim-dark'
+  use 'sainnhe/edge'
+  use 'B4mbus/oxocarbon-lua.nvim'
+  use 'Th3Whit3Wolf/one-nvim'
+  -- use 'RRethy/nvim-base16'
+
+  -- Tree
+  use {
+    'nvim-tree/nvim-tree.lua',
+    requires = {
+      'nvim-tree/nvim-web-devicons', -- optional, for file icons
+    },
+    config = function()
+      require("nvim-tree").setup()
+    end,
+  }
+  use {
+    "luukvbaal/nnn.nvim",
+    config = function() require("nnn").setup() end
+  }
+
+  use {
+    "MunifTanjim/nui.nvim"
+  }
 
 end)

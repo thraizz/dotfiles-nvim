@@ -12,7 +12,7 @@ noremap <F9> :!%:p<cr>
 "" Show keymaps
 nnoremap  <leader><leader> <cmd>Telescope keymaps<cr>
 "" Show files
-nnoremap  <leader>N  <cmd>NvimTreeToggle<cr>
+nnoremap  <leader>N  <cmd>NvimTreeFindFile<cr>
 nnoremap  <leader>nn  <cmd>NnnPicker<cr>
 nnoremap  <leader>fd <cmd>Telescope buffers <cr>
 nnoremap  <leader>fo <cmd>Telescope oldfiles cwd_only=true include_current_session=true<cr>
@@ -61,6 +61,10 @@ nnoremap  <C-_>       <cmd>Commentary<cr>
 vnoremap  <C-_>       <Plug>Commentary<cr>
 vnoremap <leader>re   <cmd>lua require("react-extract").extract_to_new_file()<cr>
 vnoremap <leader>rc   <cmd>lua require("react-extract").extract_to_current_file()<cr>
+"" Typescript stuff
+nnoremap <leader>ta   <cmd>lua require("typescript").actions.addMissingImports()<cr>
+nnoremap <leader>tf   <cmd>lua require("typescript").actions.fixAll()<cr>
+nnoremap <leader>tr   <cmd>lua require("typescript").actions.removeUnused()<cr>
 
 " Jump between merge conflicts with F8
 map <F8> /^\(<\{7\}\\|>\{7\}\\|=\{7\}\\|\|\{7\}\)\( \\|$\)<cr>

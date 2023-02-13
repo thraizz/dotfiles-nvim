@@ -86,6 +86,7 @@ require("telescope").setup {
     file_browser = {
       theme = "dropdown",
       respect_gitignore = true,
+      hidden = true,
       mappings = {
         i = {
           ["<Leader>n"] = fb_actions.create,

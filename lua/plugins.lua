@@ -123,6 +123,7 @@ return require('packer').startup(function()
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
+      'hrsh7th/cmp-copilot',
       'thraizz/friendly-snippets',
       'saadparwaiz1/cmp_luasnip',
       'L3MON4D3/LuaSnip',
@@ -241,7 +242,15 @@ return require('packer').startup(function()
   }
   use {
     "luukvbaal/nnn.nvim",
-    config = function() require("nnn").setup() end
+    config = function()
+      require("nnn").setup({
+        picker = {
+          cmd = "nnn -nAad -P p -T t",
+          style = { border = "rounded" },
+        },
+        replace_netrw = "picker",
+      })
+    end
   }
 
   use {

@@ -66,25 +66,34 @@ local completion_or_enter = function(fallback)
   end
 end
 
+local mapping = {
+  ['<leader>co'] = cmp.mapping.complete({
+    config = {
+      sources = {
+        { name = 'copilot' }
+      }
+    }
+  }),
+  ['<C-p>'] = cmp.mapping.select_prev_item(),
+  ['<C-n>'] = cmp.mapping.confirm({ select = true }),
+  ['<C-d>'] = cmp.mapping.scroll_docs(-2),
+  ['<C-f>'] = cmp.mapping.scroll_docs(2),
+  ['<C-Space>'] = cmp.mapping(open_or_confirm, { "i", "s" }),
+  ['<C-e>'] = cmp.mapping.close(),
+  ["<Down>"] = cmp.mapping(jump_forwards, { "i", "s" }),
+  ["<Tab>"] = cmp.mapping(next_snippet_or_confirm, { "i", "s" }),
+  ["<S-Tab>"] = cmp.mapping(jump_backwards, { "i", "s" }),
+  ["<Up>"] = cmp.mapping(jump_backwards, { "i", "s" }),
+  ["<CR>"] = cmp.mapping(completion_or_enter, { "i", "s" }),
+}
+
 cmp.setup {
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
   },
-  mapping = {
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-n>'] = cmp.mapping.confirm({ select = true }),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-2),
-    ['<C-f>'] = cmp.mapping.scroll_docs(2),
-    ['<C-Space>'] = cmp.mapping(open_or_confirm, { "i", "s" }),
-    ['<C-e>'] = cmp.mapping.close(),
-    ["<Down>"] = cmp.mapping(jump_forwards, { "i", "s" }),
-    ["<Tab>"] = cmp.mapping(next_snippet_or_confirm, { "i", "s" }),
-    ["<S-Tab>"] = cmp.mapping(jump_backwards, { "i", "s" }),
-    ["<Up>"] = cmp.mapping(jump_backwards, { "i", "s" }),
-    ["<CR>"] = cmp.mapping(completion_or_enter, { "i", "s" }),
-  },
+  mapping = mapping,
   sources = {
     { name = 'path' },
     { name = 'nvim_lsp' },
@@ -93,14 +102,17 @@ cmp.setup {
     { name = 'omni' },
     { name = 'luasnip' },
     { name = 'friendly-snippets' },
+    { name = 'copilot' },
   },
   formatting = {
     format = lspkind.cmp_format(),
   },
 }
 cmp.setup.filetype('gitcommit', {
+  mapping = mapping,
   sources = cmp.config.sources({
     { name = "git" },
+    { name = 'copilot' },
   },
     {
       { name = 'buffer' },

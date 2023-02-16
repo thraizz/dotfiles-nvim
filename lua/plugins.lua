@@ -161,6 +161,13 @@ return require('packer').startup(function()
       }
     }
   }
+  use {
+  "nvim-telescope/telescope-frecency.nvim",
+  config = function()
+    require"telescope".load_extension("frecency")
+  end,
+  requires = {"kkharji/sqlite.lua"}
+}
   -- Debugger
   use 'mfussenegger/nvim-dap'
   -- Python Debugger

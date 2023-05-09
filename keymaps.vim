@@ -8,11 +8,14 @@ noremap <F9> :!%:p<cr>
 " preserve my pinkies health by using ; for :
 " nnoremap ; :
 
+" Jump to config
+nnoremap  <leader>; <cmd>vs ~/.config/nvim/init.vim<cr>
+
 " Telescope
 "" Show keymaps
 nnoremap  <leader><leader> <cmd>Telescope keymaps<cr>
 "" NvimTree / nnn
-nnoremap  <leader>N  <cmd>NvimTreeFindFile<cr>
+nnoremap  <leader>N  <cmd>NvimTreeFindFileToggle<cr>
 nnoremap  <leader>nn  <cmd>NnnPicker<cr>
 "" Show [f]iles
 nnoremap  <leader>fd <cmd>Telescope buffers <cr>
@@ -46,7 +49,7 @@ nnoremap  <leader>dn <cmd>lua vim.diagnostic.goto_next({severity={min=vim.diagno
 nnoremap  <leader>dN <cmd>lua vim.diagnostic.goto_prev({severity={min=vim.diagnostic.severity.WARN}})<cr>zz
 
 "" [g]it stuff
-nnoremap  <leader>gs  <cmd>vertical Git<cr>
+nnoremap  <leader>gs  <cmd>Git<cr>
 nnoremap  <leader>gd  <cmd>vertical Gdiffsplit<cr>
 nnoremap  <leader>gfa <cmd>Git fetch --all<cr>
 nnoremap  <leader>gCm  <cmd>Git checkout main<cr>
@@ -68,6 +71,7 @@ nnoremap <leader>ta   <cmd>lua require("typescript").actions.addMissingImports()
 nnoremap <leader>tf   <cmd>lua require("typescript").actions.fixAll()<cr>
 nnoremap <leader>td   <cmd>lua require("typescript").actions.removeUnused()<cr>
 nnoremap <leader>tr   <cmd>lua vim.lsp.buf.rename()<cr>
+
 
 " Jump between merge conflicts with F8
 map <F8> /^\(<\{7\}\\|>\{7\}\\|=\{7\}\\|\|\{7\}\)\( \\|$\)<cr>

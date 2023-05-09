@@ -34,7 +34,7 @@ local vim = vim
 local api = vim.api
 local handlers = vim.lsp.handlers
 local function filterReactDTS(value)
-  return string.match(value.targetUri, 'react/index.d.ts') == nil
+  return string.match(value.targetUri, 'react/ts5.0/index.d.ts') == nil
 end
 
 local function filter(arr, fn)
@@ -150,3 +150,46 @@ vim.keymap.set(
     require('nvim-window').pick()
   end
 )
+
+local Input = require("nui.input")
+local event = require("nui.utils.autocmd").event
+
+local input = Input({
+  position = "50%",
+  size = {
+    width = 70,
+  },
+  border = {
+    style = "single",
+    text = {
+      top = "[Branch Name?]",
+      top_align = "center",
+    },
+  },
+  win_options = {
+    winhighlight = "Normal:Normal,FloatBorder:Normal",
+  },
+}, {
+  prompt = "> ",
+  on_close = function()
+    print("Input Closed!")
+  end,
+  on_submit = function(value)
+    vim.cmd("Git checkout -b ", value)
+  end,
+})
+input:map("n", "<Esc>", function()
+  input:unmount()
+end, { noremap = true })
+
+local openBranchPicker = function()
+  input:mount()
+end
+
+-- mount/open the component
+vim.keymap.set('n', '<leader>gn', openBranchPicker)
+
+-- unmount component when cursor leaves buffer
+input:on(event.BufLeave, function()
+  input:unmount()
+end)

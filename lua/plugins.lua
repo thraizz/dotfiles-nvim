@@ -74,7 +74,7 @@ return require('packer').startup(function()
         ts_config = {
           lua = { 'string' }, -- it will not add a pair on that treesitter node
           javascript = { 'template_string' },
-          java = false, -- don't check treesitter on java
+          java = false,       -- don't check treesitter on java
         }
       })
       local ts_conds = require('nvim-autopairs.ts-conds')
@@ -100,8 +100,12 @@ return require('packer').startup(function()
   }
   use 'SmiteshP/nvim-gps'
   -- LSP Configuration
-  use 'neovim/nvim-lspconfig'
-  use 'williamboman/nvim-lsp-installer'
+  use {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    'neovim/nvim-lspconfig',
+    run = ":MasonUpdate", -- :MasonUpdate updates registry contents
+  }
   use 'nvim-lua/popup.nvim'
   use 'nvim-lua/plenary.nvim'
   use 'nvim-lua/lsp-status.nvim'
@@ -162,18 +166,55 @@ return require('packer').startup(function()
     }
   }
   use {
-  "nvim-telescope/telescope-frecency.nvim",
-  config = function()
-    require"telescope".load_extension("frecency")
-  end,
-  requires = {"kkharji/sqlite.lua"}
-}
+    "nvim-telescope/telescope-frecency.nvim",
+    config = function()
+      require "telescope".load_extension("frecency")
+    end,
+    requires = { "kkharji/sqlite.lua" }
+  }
   -- Debugger
-  use 'mfussenegger/nvim-dap'
+  use {
+    "rcarriga/nvim-dap-ui",
+    requires = { "mfussenegger/nvim-dap" },
+    config = function()
+      require('dapui').setup()
+    end
+  }
+  use {
+    "David-Kunz/jester",
+    requires = { "mfussenegger/nvim-dap" },
+    config = function()
+      require('jester').setup({
+        cmd = "react-scripts test -t '$result' -- $file", -- run command
+        identifiers = { "test", "it" },                   -- used to identify tests
+        prepend = { "describe" },                         -- prepend describe blocks
+        expressions = { "call_expression" },              -- tree-sitter object used to scan for tests/describe blocks
+        path_to_jest_run = 'jest',                        -- used to run tests
+        path_to_jest_debug = './node_modules/.bin/jest',  -- used for debugging
+        terminal_cmd = ":vsplit | terminal",              -- used to spawn a terminal for running tests, for debugging refer to nvim-dap's config
+        dap = {
+          -- debug adapter configuration
+          type = 'node2',
+          request = 'launch',
+          cwd = vim.fn.getcwd(),
+          runtimeArgs = { '--inspect-brk', '$path_to_jest', '--no-coverage', '-t', '$result', '--', '$file' },
+          args = { '--no-cache' },
+          sourceMaps = false,
+          protocol = 'inspector',
+          skipFiles = { '<node_internals>/**/*.js' },
+          console = 'integratedTerminal',
+          port = 9229,
+          disableOptimisticBPs = true
+        }
+      })
+    end
+  }
+
   -- Python Debugger
   -- requires debugpy!
   use {
     'mfussenegger/nvim-dap-python',
+    requires = { "mfussenegger/nvim-dap" },
     config = function()
       require('dap-python').setup('/usr/bin/python')
     end
@@ -188,7 +229,7 @@ return require('packer').startup(function()
   use 'mxw/vim-jsx'
   use 'pangloss/vim-javascript'
   use 'lepture/vim-jinja'
-  use 'prettier/vim-prettier'
+  -- use 'prettier/vim-prettier'
   use({
     "andythigpen/nvim-coverage",
     requires = "nvim-lua/plenary.nvim",
@@ -219,10 +260,10 @@ return require('packer').startup(function()
     end
   }
   -- Colorschemes / themes
-  use 'marko-cerovac/material.nvim'
+  -- use 'marko-cerovac/material.nvim'
   use 'https://gitlab.com/yorickpeterse/nvim-window.git'
-  use 'sainnhe/sonokai'
-  use 'tiagovla/tokyodark.nvim'
+  -- use 'sainnhe/sonokai'
+  -- use 'tiagovla/tokyodark.nvim'
   use 'projekt0n/github-nvim-theme'
   -- use 'joshdick/onedark.vim'
   -- use { 'catppuccin/nvim', as='catppuccin' }
@@ -230,12 +271,22 @@ return require('packer').startup(function()
   -- use 'liuchengxu/space-vim-dark'
   -- use 'ahmedabdulrahman/aylin.vim'
   -- use 'rebelot/kanagawa.nvim'
-  use 'NLKNguyen/papercolor-theme'
-  use 'liuchengxu/space-vim-dark'
-  use 'sainnhe/edge'
-  use 'B4mbus/oxocarbon-lua.nvim'
-  use 'Th3Whit3Wolf/one-nvim'
+  -- use 'NLKNguyen/papercolor-theme'
+  -- use 'liuchengxu/space-vim-dark'
+  -- use 'sainnhe/edge'
+  -- use 'B4mbus/oxocarbon-lua.nvim'
+  -- use 'Th3Whit3Wolf/one-nvim'
   -- use 'RRethy/nvim-base16'
+  use { 'cormacrelf/dark-notify',
+    config = function()
+      require('dark_notify').run({
+        schemes = {
+          dark = "github_dark_default",
+          light = "github_light",
+        }
+      })
+    end
+  }
 
   -- Tree
   use {
@@ -263,5 +314,7 @@ return require('packer').startup(function()
   use {
     "MunifTanjim/nui.nvim"
   }
-
+  use {
+    "github/copilot.vim"
+  }
 end)

@@ -1,13 +1,9 @@
-local lspconfig = require('lspconfig')
-local ts_utils = require("nvim-lsp-ts-utils")
-local lsp_status = require('lsp-status')
-local lsp_installer = require("nvim-lsp-installer")
-local cmp_nvim_lsp = require('cmp_nvim_lsp')
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
+require("mason").setup()
+require("mason-lspconfig").setup()
 
-lsp_installer.setup {}
+local lspconfig = require('lspconfig')
+local lsp_status = require('lsp-status')
+local cmp_nvim_lsp = require('cmp_nvim_lsp')
 lsp_status.register_progress()
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -16,12 +12,6 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
   update_in_insert = false, -- delay update
   severity_sort = true
 })
-
-local signs = { Error = '✘', Warning = '', Hint = '', Information = '' }
-for type, icon in pairs(signs) do
-  local hl = 'LspDiagnosticsSign' .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
-end
 
 local lsp_formatting = function(bufnr)
   vim.lsp.buf.format({
@@ -59,97 +49,40 @@ local on_attach = function(client, bufnr)
 end
 
 local capabilities = cmp_nvim_lsp.default_capabilities()
-
-for _, server in ipairs(lsp_installer.get_installed_servers()) do
-  lspconfig[server.name].setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-    autostart = true
-  }
-end
-
-lspconfig.pyright.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  autostart = false
-}
-
--- lspconfig.stylelint_lsp.setup {
---   capabilities = capabilities,
---   on_attach = on_attach,
---   autostart = false
--- }
-
-lspconfig.lua_lsp.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-        -- Setup your lua path
-        path = runtime_path,
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { 'vim', 'packer' },
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
-    },
-  }
-})
-
-lspconfig.tsserver.setup {
-  -- init_options = require("nvim-lsp-ts-utils").init_options,
-  capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    client.server_capabilities.document_formatting = false
-    client.server_capabilities.document_range_formatting = false
-    -- ts_utils.setup()
-    -- ts_utils.setup_client(client)
-    on_attach(client, bufnr)
-  end,
-}
-
--- local null_ls_sources = {
---   -- null_ls.builtins.diagnostics.eslint_d.with({
---   --   cwd = function(params)
---   --     return require("lspconfig.util").root_pattern("tsconfig.json")(params.bufname)
---   --   end,
---   -- }),
---   -- null_ls.builtins.code_actions.eslint_d.with({
---   --   cwd = function(params)
---   --     return require("lspconfig.util").root_pattern("tsconfig.json")(params.bufname)
---   --   end,
---   -- }),
---   -- null_ls.builtins.formatting.eslint_d.with({
---   --   cwd = function(params)
---   --     return require("lspconfig.util").root_pattern("tsconfig.json")(params.bufname)
---   --   end,
---   -- }),
---   null_ls.builtins.formatting.prettier.with({
---     filetypes = { "scss", "json", "yaml", "markdown", "css" },
---   }),
--- }
--- null_ls.setup({
---   capabilities = capabilities,
---   on_attach = on_attach,
---   autostart = true,
---   debug = true,
---   sources = null_ls_sources,
--- })
 require("typescript").setup({
-  disable_commands = false, -- prevent the plugin from creating Vim commands
-  debug = false, -- enable debug logging for commands
-  server = { -- pass options to lspconfig's setup method
-    on_attach = on_attach,
+    disable_commands = false, -- prevent the plugin from creating Vim commands
+    debug = false, -- enable debug logging for commands
+    go_to_source_definition = {
+        fallback = true, -- fall back to standard LSP definition on failure
+    },
+    server = { -- pass options to lspconfig's setup method
+        on_attach = ...,
+    },
+})
+local null_ls = require("null-ls")
+null_ls.setup({
+  sources = {
+            null_ls.builtins.formatting.eslint_d,
+        null_ls.builtins.diagnostics.eslint_d,
+        null_ls.builtins.completion.spell,
+    require("typescript.extensions.null-ls.code-actions"),
   },
 })
+
+require("mason-lspconfig").setup_handlers {
+  function(server_name)
+    lspconfig[server_name].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      autostart = true
+    }
+  end,
+  ["tsserver"] = function()
+    lspconfig.tsserver.setup {
+      init_options = require("nvim-lsp-ts-utils").init_options,
+      capabilities = capabilities,
+      on_attach = on_attach,
+      autostart = true,
+    }
+  end,
+}

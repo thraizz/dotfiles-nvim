@@ -38,6 +38,7 @@ return require('packer').startup(function()
     'tpope/vim-fugitive',
     requires = 'junegunn/gv.vim',
   }
+  use 'airblade/vim-gitgutter'
   use 'tpope/vim-commentary'
   use("tpope/vim-surround")
   use("tpope/vim-unimpaired")

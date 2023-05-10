@@ -49,6 +49,8 @@ nnoremap  <leader>dn <cmd>lua vim.diagnostic.goto_next({severity={min=vim.diagno
 nnoremap  <leader>dN <cmd>lua vim.diagnostic.goto_prev({severity={min=vim.diagnostic.severity.WARN}})<cr>zz
 
 "" [g]it stuff
+nnoremap  <leader>gn  <cmd>GitGutterNextHunk<cr>
+nnoremap  <leader>gN  <cmd>GitGutterPrevHunk<cr>
 nnoremap  <leader>gs  <cmd>Git<cr>
 nnoremap  <leader>gd  <cmd>vertical Gdiffsplit<cr>
 nnoremap  <leader>gfa <cmd>Git fetch --all<cr>

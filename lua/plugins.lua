@@ -48,9 +48,6 @@ return require('packer').startup(function()
   use 'JoosepAlviste/nvim-ts-context-commentstring'
   -- Jump anywhere easy
   use 'justinmk/vim-sneak'
-  -- Note taking with :Note something
-  -- use 'xolox/vim-notes'
-  -- use 'xolox/vim-misc'
   -- Markdown enhancers
   -- tabular plugin is used to format tables
   use 'godlygeek/tabular'
@@ -87,7 +84,7 @@ return require('packer').startup(function()
       })
     end
   }
-  use('windwp/nvim-ts-autotag') -- automatically close jsx tags
+  -- use('windwp/nvim-ts-autotag') -- automatically close jsx tags
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
@@ -135,17 +132,17 @@ return require('packer').startup(function()
     }
   }
   use 'hoob3rt/lualine.nvim'
-  -- use {
-  --   'akinsho/bufferline.nvim',
-  --   config = function()
-  --     require('bufferline').setup {
-  --       options = {
-  --         diagnostics = 'nvim_lsp',
-  --         mode = 'tabs',
-  --       }
-  --     }
-  --   end
-  -- }
+  use {
+    'akinsho/bufferline.nvim',
+    config = function()
+      require('bufferline').setup {
+        options = {
+          diagnostics = 'nvim_lsp',
+          mode = 'tabs',
+        }
+      }
+    end
+  }
   -- Pretty git experience
   use 'thraizz/git-blame.nvim'
   -- Icons for statusline and telescope
@@ -165,6 +162,21 @@ return require('packer').startup(function()
         'natecraddock/telescope-zf-native.nvim'
       }
     }
+  }
+  use {
+    'nvim-telescope/telescope-project.nvim',
+    config = function()
+      require('telescope').setup {
+        extensions = {
+          project = {
+            base_dirs = {
+              '~/work',
+              { '~/dev' },
+            },
+          }
+        }
+      }
+    end
   }
   use {
     "nvim-telescope/telescope-frecency.nvim",
@@ -252,19 +264,21 @@ return require('packer').startup(function()
     'beauwilliams/focus.nvim',
     config = function()
       require('focus').setup({
-        autoresize = false,
-        hybridnumber = false,
-        signcolumn = false,
-        winhighlight = false,
+        autoresize = { enable = false },
+        ui = {
+          hybridnumber = false,
+          signcolumn = false,
+          winhighlight = false,
+        },
         excluded_filetypes = { 'telescope', 'NvimTree' }
       })
     end
   }
   -- Colorschemes / themes
-  -- use 'marko-cerovac/material.nvim'
+  use 'marko-cerovac/material.nvim'
   use 'https://gitlab.com/yorickpeterse/nvim-window.git'
-  -- use 'sainnhe/sonokai'
-  -- use 'tiagovla/tokyodark.nvim'
+  use 'sainnhe/sonokai'
+  use 'tiagovla/tokyodark.nvim'
   use 'projekt0n/github-nvim-theme'
   -- use 'joshdick/onedark.vim'
   -- use { 'catppuccin/nvim', as='catppuccin' }
@@ -282,14 +296,14 @@ return require('packer').startup(function()
     config = function()
       require('dark_notify').run({
         schemes = {
-          dark = "github_dark_default",
+          dark = "github_dark_high_contrast",
           light = "github_light",
         }
       })
     end
   }
 
-  -- Tree
+  -- -- Tree
   use {
     'nvim-tree/nvim-tree.lua',
     requires = {
@@ -317,5 +331,13 @@ return require('packer').startup(function()
   }
   use {
     "github/copilot.vim"
+  }
+
+  use {
+    "startup-nvim/startup.nvim",
+    requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+    config = function()
+      require "startup".setup()
+    end
   }
 end)

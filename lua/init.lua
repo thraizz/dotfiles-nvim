@@ -1,7 +1,6 @@
-local ts_utils = require 'nvim-treesitter.ts_utils'
 require "plugins"
 require "theme"
-require "statusline"
+-- require "statusline"
 require "telescoped"
 require "lsp"
 require "completion"
@@ -10,6 +9,7 @@ require "settings"
 require "apiKeys"
 
 local copyJSONPath = function()
+  local ts_utils = require 'nvim-treesitter.ts_utils'
   local node = ts_utils.get_node_at_cursor();
   if not node then
     return ""
@@ -30,11 +30,15 @@ vim.keymap.set('n', '<leader>cp', copyJSONPath)
 
 local log = require('vim.lsp.log')
 local util = require('vim.lsp.util')
-local vim = vim
 local api = vim.api
 local handlers = vim.lsp.handlers
 local function filterReactDTS(value)
-  return string.match(value.targetUri, 'react/ts5.0/index.d.ts') == nil
+  -- only check if we have a value given in
+  if value == nil or value.targetUri == nil then
+    return false
+  else
+    return string.match(value.targetUri, 'react/ts5.0/index.d.ts') == nil
+  end
 end
 
 local function filter(arr, fn)
@@ -150,3 +154,21 @@ vim.keymap.set(
     require('nvim-window').pick()
   end
 )
+if vim.g.neovide then
+  vim.keymap.set('n', '<D-s>', ':w<CR>')      -- Save
+  vim.keymap.set('v', '<D-c>', '"+y')         -- Copy
+  vim.keymap.set('n', '<D-v>', '"+P')         -- Paste normal mode
+  vim.keymap.set('v', '<D-v>', '"+P')         -- Paste visual mode
+  vim.keymap.set('c', '<D-v>', '<C-R>+')      -- Paste command mode
+  vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
+  vim.g.neovide_cursor_trail_size = 0.2
+  vim.schedule(function()
+    vim.cmd "NeovideFocus"
+  end)
+end
+
+-- Allow clipboard copy paste in neovim
+vim.api.nvim_set_keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })

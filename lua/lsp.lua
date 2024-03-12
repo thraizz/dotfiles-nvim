@@ -50,21 +50,21 @@ end
 
 local capabilities = cmp_nvim_lsp.default_capabilities()
 require("typescript").setup({
-    disable_commands = false, -- prevent the plugin from creating Vim commands
-    debug = false, -- enable debug logging for commands
-    go_to_source_definition = {
-        fallback = true, -- fall back to standard LSP definition on failure
-    },
-    server = { -- pass options to lspconfig's setup method
-        on_attach = ...,
-    },
+  disable_commands = false,   -- prevent the plugin from creating Vim commands
+  debug = false,              -- enable debug logging for commands
+  go_to_source_definition = {
+    fallback = true,          -- fall back to standard LSP definition on failure
+  },
+  server = {                  -- pass options to lspconfig's setup method
+    on_attach = ...,
+  },
 })
 local null_ls = require("null-ls")
 null_ls.setup({
   sources = {
-            null_ls.builtins.formatting.eslint_d,
-        null_ls.builtins.diagnostics.eslint_d,
-        null_ls.builtins.completion.spell,
+    null_ls.builtins.formatting.eslint_d,
+    null_ls.builtins.diagnostics.eslint_d,
+    null_ls.builtins.completion.spell,
     require("typescript.extensions.null-ls.code-actions"),
   },
 })

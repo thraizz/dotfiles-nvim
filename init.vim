@@ -4,9 +4,13 @@ so $HOME/.config/nvim/keymaps.vim
 
 autocmd FileType typescriptreact setlocal commentstring={/*\ %s\ */}
 
-" autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js,*.test.tsx EslintFixAll
-" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.test.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue,*.svelte lua vim.buf.lsp.format()
-
 command CreateScss norm :vs expand("%:p:r")<cr>
-autocmd! gitgutter CursorHold,CursorHoldI
 autocmd BufWritePost * GitGutter
+
+if exists("g:neovide")
+  " Extend shell to know homebrew path
+  let $PATH = $PATH . ':/opt/homebrew/bin'
+  
+  " Start in user home directory
+  cd ~
+endif

@@ -19,13 +19,14 @@ nnoremap  <leader>N  <cmd>NvimTreeFindFileToggle<cr>
 nnoremap  <leader>nn  <cmd>NnnPicker<cr>
 "" Show [f]iles
 nnoremap  <leader>fd <cmd>Telescope buffers <cr>
-nnoremap  <leader>fo <cmd>Telescope oldfiles cwd_only=true include_current_session=true<cr>
-nnoremap  <leader>fO <cmd>Telescope oldfiles cwd_only=true include_current_session=true<cr>
-nnoremap  <leader>ff <cmd>Telescope find_files sort_lastused=true hidden=true<cr>
+nnoremap  <leader>fo <cmd>Telescope oldfiles cwd_only=true include_current_session=true theme=ivy<cr>
+nnoremap  <leader>fO <cmd>Telescope oldfiles cwd_only=true include_current_session=true theme=ivy<cr>
+nnoremap  <leader>ff <cmd>Telescope find_files sort_lastused=true hidden=true theme=ivy<cr>
 xnoremap  <leader>ff y<cmd>Telescope find_files<cr><c-r>"
 nnoremap  <leader>fc <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap  <leader>fp <cmd>Telescope frecency workspace=CWD theme=ivy <cr>
 nnoremap  <leader>fP <cmd>Telescope frecency<cr>
+nnoremap  <leader>p <cmd>Telescope projects<cr>
 nnoremap  <leader>fs <cmd>Telescope live_grep grep_open_files=true theme=ivy<cr>
 nnoremap  <leader>fS <cmd>Telescope live_grep<cr>
 xnoremap  <leader>fs <cmd>Telescope grep_string<cr>

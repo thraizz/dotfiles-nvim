@@ -49,16 +49,6 @@ local on_attach = function(client, bufnr)
 end
 
 local capabilities = cmp_nvim_lsp.default_capabilities()
-require("typescript").setup({
-  disable_commands = false,   -- prevent the plugin from creating Vim commands
-  debug = false,              -- enable debug logging for commands
-  go_to_source_definition = {
-    fallback = true,          -- fall back to standard LSP definition on failure
-  },
-  server = {                  -- pass options to lspconfig's setup method
-    on_attach = ...,
-  },
-})
 local null_ls = require("null-ls")
 null_ls.setup({
   sources = {
@@ -83,6 +73,21 @@ require("mason-lspconfig").setup_handlers {
       capabilities = capabilities,
       on_attach = on_attach,
       autostart = true,
+    }
+  end,
+  -- Disable lua and yaml autostart
+  ["lua_ls"] = function()
+    lspconfig.lua_ls.setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      autostart = false
+    }
+  end,
+  ["yamlls"] = function()
+    lspconfig.yamlls.setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      autostart = false
     }
   end,
 }

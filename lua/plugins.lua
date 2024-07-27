@@ -14,6 +14,9 @@ vim.cmd([[
 
 return require('packer').startup(function()
   use {
+    "LintaoAmons/scratch.nvim",
+  }
+  use {
     'uga-rosa/translate.nvim',
     config = function()
       require('translate').setup({
@@ -188,7 +191,7 @@ return require('packer').startup(function()
   -- Debugger
   use {
     "rcarriga/nvim-dap-ui",
-    requires = { "mfussenegger/nvim-dap" },
+    requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
     config = function()
       require('dapui').setup()
     end
@@ -296,7 +299,7 @@ return require('packer').startup(function()
     config = function()
       require('dark_notify').run({
         schemes = {
-          dark = "github_dark_high_contrast",
+          dark = "github_dark",
           light = "github_light",
         }
       })

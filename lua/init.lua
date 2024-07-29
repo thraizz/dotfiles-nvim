@@ -8,6 +8,19 @@ require "treesitter"
 require "settings"
 require "apiKeys"
 
+local get_node_text
+if vim.treesitter.get_node_text then
+  -- Neovim 0.9
+  get_node_text = vim.treesitter.get_node_text
+elseif vim.treesitter.query and vim.treesitter.query.get_node_text then
+  get_node_text = vim.treesitter.query.get_node_text
+else
+  local ts_utils = require("nvim-treesitter.ts_utils")
+  get_node_text = function(node, buf)
+    return ts_utils.get_node_text(node, buf)[1]
+  end
+end
+
 local copyJSONPath = function()
   local ts_utils = require 'nvim-treesitter.ts_utils'
   local node = ts_utils.get_node_at_cursor();
@@ -18,7 +31,7 @@ local copyJSONPath = function()
   while node do
     if node:type() == 'pair' then
       local key_node = node:named_child(0):named_child(0)
-      table.insert(result, 1, vim.treesitter.query.get_node_text(key_node, 0))
+      table.insert(result, 1, get_node_text(key_node, 0))
     end
     node = node:parent()
   end

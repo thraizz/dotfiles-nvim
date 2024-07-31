@@ -81,7 +81,9 @@ local mapping = {
   ['<C-Space>'] = cmp.mapping(open_or_confirm, { "i", "s" }),
   ['<C-e>'] = cmp.mapping.close(),
   ["<Down>"] = cmp.mapping(jump_forwards, { "i", "s" }),
+  ["<Right>"] = cmp.mapping(jump_forwards, { "i", "s" }),
   ["<Up>"] = cmp.mapping(jump_backwards, { "i", "s" }),
+  ["<Left>"] = cmp.mapping(luasnip.expand_or_jump, { "i", "s" }),
   ["<CR>"] = cmp.mapping(completion_or_enter, { "i", "s" }),
 }
 
@@ -93,11 +95,11 @@ cmp.setup {
   },
   mapping = mapping,
   sources = {
-    { name = 'path' },
+    -- { name = 'path' },
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_document_symbol' },
-    { name = 'buffer' },
-    { name = 'omni' },
+    -- { name = 'buffer' },
+    -- { name = 'omni' },
     { name = 'luasnip' },
     { name = 'friendly-snippets' },
   },

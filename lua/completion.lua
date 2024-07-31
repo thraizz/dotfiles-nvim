@@ -38,6 +38,22 @@ local jump_backwards = function(fallback)
   end
 end
 
+local luasnip_backwards_or_fallback = function(fallback)
+  if luasnip.jumpable(-1) then
+    luasnip.jump(-1)
+  else
+    fallback()
+  end
+end
+
+local luasnip_forwards_or_fallback = function(fallback)
+  if luasnip.expand_or_jumpabe() then
+    luasnip.expand_or_jump()
+  else
+    fallback()
+  end
+end
+
 local next_snippet_or_confirm = function(fallback)
   if cmp.get_selected_entry() then
     cmp.confirm({ select = false })
@@ -81,9 +97,9 @@ local mapping = {
   ['<C-Space>'] = cmp.mapping(open_or_confirm, { "i", "s" }),
   ['<C-e>'] = cmp.mapping.close(),
   ["<Down>"] = cmp.mapping(jump_forwards, { "i", "s" }),
-  ["<Right>"] = cmp.mapping(jump_forwards, { "i", "s" }),
+  ["<Right>"] = cmp.mapping(luasnip_forwards_or_fallback, { "i", "s" }),
   ["<Up>"] = cmp.mapping(jump_backwards, { "i", "s" }),
-  ["<Left>"] = cmp.mapping(luasnip.expand_or_jump, { "i", "s" }),
+  ["<Left>"] = cmp.mapping(luasnip_backwards_or_fallback, { "i", "s" }),
   ["<CR>"] = cmp.mapping(completion_or_enter, { "i", "s" }),
 }
 

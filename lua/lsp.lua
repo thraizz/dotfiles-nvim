@@ -13,26 +13,7 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
   severity_sort = true
 })
 
-local lsp_formatting = function(bufnr)
-  vim.lsp.buf.format({
-    filter = function(client) return client.name ~= "tsserver" end,
-    bufnr = bufnr,
-  })
-end
-
-local formatting_group = vim.api.nvim_create_augroup("LspFormatting", {})
-
 local on_attach = function(client, bufnr)
-  if client.supports_method("textDocument/formatting") then
-    vim.api.nvim_clear_autocmds({ group = formatting_group, buffer = bufnr })
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      group = formatting_group,
-      buffer = bufnr,
-      callback = function()
-        lsp_formatting(bufnr)
-      end,
-    })
-  end
   vim.api.nvim_create_autocmd("CursorHold", {
     buffer = bufnr,
     callback = function()
@@ -49,15 +30,6 @@ local on_attach = function(client, bufnr)
 end
 
 local capabilities = cmp_nvim_lsp.default_capabilities()
-local null_ls = require("null-ls")
-null_ls.setup({
-  sources = {
-    null_ls.builtins.formatting.eslint_d,
-    null_ls.builtins.diagnostics.eslint_d,
-    null_ls.builtins.completion.spell,
-    require("typescript.extensions.null-ls.code-actions"),
-  },
-})
 
 require("mason-lspconfig").setup_handlers {
   function(server_name)

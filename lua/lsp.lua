@@ -1,5 +1,7 @@
 require("mason").setup()
 require("mason-lspconfig").setup()
+require("lsp-format").setup {}
+
 
 local lspconfig = require('lspconfig')
 local lsp_status = require('lsp-status')
@@ -14,6 +16,8 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
 })
 
 local on_attach = function(client, bufnr)
+  require("lsp-format").on_attach(client, bufnr)
+
   vim.api.nvim_create_autocmd("CursorHold", {
     buffer = bufnr,
     callback = function()

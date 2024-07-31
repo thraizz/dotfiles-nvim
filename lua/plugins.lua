@@ -238,8 +238,6 @@ return require('packer').startup(function()
   -- JS/TS specific LSP configuration
   use 'jose-elias-alvarez/nvim-lsp-ts-utils'
   use 'jose-elias-alvarez/typescript.nvim'
-  -- null-ls
-  use 'jose-elias-alvarez/null-ls.nvim'
   -- Vue specific configuration
   -- use 'posva/vim-vue'
   use 'mxw/vim-jsx'
